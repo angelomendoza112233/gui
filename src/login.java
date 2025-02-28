@@ -118,6 +118,7 @@ public class login extends javax.swing.JFrame {
         jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 250, 200, 50));
 
         username.setToolTipText("Username");
+        username.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         username.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 usernameFocusLost(evt);
@@ -130,19 +131,22 @@ public class login extends javax.swing.JFrame {
         });
         jPanel2.add(username, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 110, 190, 20));
 
+        password.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         password.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 passwordFocusLost(evt);
             }
         });
         jPanel2.add(password, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 170, 190, 20));
+
+        errorlabelpass.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jPanel2.add(errorlabelpass, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 190, 170, 10));
         jPanel2.add(errorlabeluser, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 130, 160, -1));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 270, 300));
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/angelo-removebg-preview.png"))); // NOI18N
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 160, 380, 180));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 150, 380, 180));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 630, 300));
 

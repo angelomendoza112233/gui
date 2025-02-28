@@ -37,12 +37,9 @@ public class register extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        firstname = new javax.swing.JTextField();
+        lastname = new javax.swing.JTextField();
         cpass = new javax.swing.JPasswordField();
         phonenumber = new javax.swing.JTextField();
-        lastname = new javax.swing.JPasswordField();
-        email = new javax.swing.JPasswordField();
-        user = new javax.swing.JPasswordField();
         pass = new javax.swing.JPasswordField();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
@@ -57,10 +54,13 @@ public class register extends javax.swing.JFrame {
         fn = new javax.swing.JLabel();
         ln = new javax.swing.JLabel();
         pn1 = new javax.swing.JLabel();
-        em = new javax.swing.JLabel();
+        errorLabelEmail = new javax.swing.JLabel();
         us = new javax.swing.JLabel();
         pw = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        user = new javax.swing.JTextField();
+        firstname2 = new javax.swing.JTextField();
+        email = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(234, 207, 181));
@@ -92,22 +92,22 @@ public class register extends javax.swing.JFrame {
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 200, 320));
 
-        firstname.setBackground(new java.awt.Color(222, 180, 138));
-        firstname.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        firstname.addFocusListener(new java.awt.event.FocusAdapter() {
+        lastname.setBackground(new java.awt.Color(222, 180, 138));
+        lastname.setBorder(new javax.swing.border.MatteBorder(null));
+        lastname.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
-                firstnameFocusLost(evt);
+                lastnameFocusLost(evt);
             }
         });
-        firstname.addActionListener(new java.awt.event.ActionListener() {
+        lastname.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                firstnameActionPerformed(evt);
+                lastnameActionPerformed(evt);
             }
         });
-        jPanel1.add(firstname, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 70, 130, 20));
+        jPanel1.add(lastname, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 70, 130, 20));
 
         cpass.setBackground(new java.awt.Color(222, 180, 138));
-        cpass.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        cpass.setBorder(new javax.swing.border.MatteBorder(null));
         cpass.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 cpassFocusLost(evt);
@@ -116,7 +116,7 @@ public class register extends javax.swing.JFrame {
         jPanel1.add(cpass, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 220, 130, 20));
 
         phonenumber.setBackground(new java.awt.Color(222, 180, 138));
-        phonenumber.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        phonenumber.setBorder(new javax.swing.border.MatteBorder(null));
         phonenumber.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 phonenumberFocusLost(evt);
@@ -129,36 +129,8 @@ public class register extends javax.swing.JFrame {
         });
         jPanel1.add(phonenumber, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 120, 130, 20));
 
-        lastname.setBackground(new java.awt.Color(222, 180, 138));
-        lastname.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        lastname.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
-        lastname.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                lastnameFocusLost(evt);
-            }
-        });
-        jPanel1.add(lastname, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 70, 130, 20));
-
-        email.setBackground(new java.awt.Color(222, 180, 138));
-        email.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        email.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                emailFocusLost(evt);
-            }
-        });
-        jPanel1.add(email, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 120, 130, 20));
-
-        user.setBackground(new java.awt.Color(222, 180, 138));
-        user.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        user.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                userFocusLost(evt);
-            }
-        });
-        jPanel1.add(user, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 170, 130, 20));
-
         pass.setBackground(new java.awt.Color(222, 180, 138));
-        pass.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        pass.setBorder(new javax.swing.border.MatteBorder(null));
         pass.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 passFocusLost(evt);
@@ -227,7 +199,7 @@ public class register extends javax.swing.JFrame {
         jPanel1.add(fn, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 90, 130, 10));
         jPanel1.add(ln, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 90, 120, 10));
         jPanel1.add(pn1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 140, 130, -1));
-        jPanel1.add(em, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 140, 130, -1));
+        jPanel1.add(errorLabelEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 140, 130, -1));
         jPanel1.add(us, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 190, 130, -1));
 
         pw.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
@@ -241,33 +213,75 @@ public class register extends javax.swing.JFrame {
         });
         jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 300, -1, -1));
 
+        user.setBackground(new java.awt.Color(222, 180, 138));
+        user.setBorder(new javax.swing.border.MatteBorder(null));
+        user.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                userFocusLost(evt);
+            }
+        });
+        user.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                userActionPerformed(evt);
+            }
+        });
+        jPanel1.add(user, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 170, 130, 20));
+
+        firstname2.setBackground(new java.awt.Color(222, 180, 138));
+        firstname2.setBorder(new javax.swing.border.MatteBorder(null));
+        firstname2.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                firstname2FocusLost(evt);
+            }
+        });
+        firstname2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                firstname2ActionPerformed(evt);
+            }
+        });
+        jPanel1.add(firstname2, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 70, 130, 20));
+
+        email.setBackground(new java.awt.Color(222, 180, 138));
+        email.setBorder(new javax.swing.border.MatteBorder(null));
+        email.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                emailFocusLost(evt);
+            }
+        });
+        email.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                emailActionPerformed(evt);
+            }
+        });
+        jPanel1.add(email, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 120, 130, 20));
+
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 545, 320));
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void firstnameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_firstnameFocusLost
-        String fname = firstname.getText();
+    private void lastnameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_lastnameFocusLost
+        String lname = lastname.getText();
 
-        if (fname.isEmpty()) {
+        if (lname.isEmpty()) {
 
-            firstname.setForeground(mycolor);
-            fn.setText("This field is required");
-            fn.setForeground(mycolor);
+            lastname.setForeground(mycolor);
+            ln.setText("This field is required");
+            ln.setForeground(mycolor);
 
         } else {
-            firstname.setForeground(Color.BLACK);
-            fn.setText("");
-            fn.setForeground(mycolor);
+            lastname.setForeground(Color.BLACK);
+            ln.setText("");
+            ln.setForeground(mycolor);
         }
 
-        firstname.repaint();
-    }//GEN-LAST:event_firstnameFocusLost
+        lastname.repaint();
+    }//GEN-LAST:event_lastnameFocusLost
 
-    private void firstnameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_firstnameActionPerformed
+    private void lastnameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lastnameActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_firstnameActionPerformed
+    }//GEN-LAST:event_lastnameActionPerformed
 
     private void cpassFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cpassFocusLost
         String lname = cpass.getText();
@@ -314,54 +328,6 @@ public class register extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_phonenumberActionPerformed
 
-    private void lastnameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_lastnameFocusLost
-        String lname = lastname.getText();
-
-        if (lname.isEmpty()) {
-            lastname.setForeground(mycolor);
-            ln.setText("This field is required");
-            ln.setForeground(mycolor);
-        } else {
-            lastname.setForeground(Color.BLACK);
-            ln.setText("");
-            ln.setForeground(mycolor);
-        }
-
-        lastname.repaint();
-    }//GEN-LAST:event_lastnameFocusLost
-
-    private void emailFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_emailFocusLost
-        String lname = lastname.getText();
-
-        if (lname.isEmpty()) {
-            lastname.setForeground(mycolor);
-            em.setText("This field is required");
-            em.setForeground(mycolor);
-        } else {
-            lastname.setForeground(Color.BLACK);
-            em.setText("");
-            em.setForeground(mycolor);
-        }
-
-        lastname.repaint();
-    }//GEN-LAST:event_emailFocusLost
-
-    private void userFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_userFocusLost
-        String lname = lastname.getText();
-
-        if (lname.isEmpty()) {
-            lastname.setForeground(mycolor);
-            us.setText("This field is required");
-            us.setForeground(mycolor);
-        } else {
-            lastname.setForeground(Color.BLACK);
-            us.setText("");
-            us.setForeground(mycolor);
-        } 
-
-        lastname.repaint();
-    }//GEN-LAST:event_userFocusLost
-
     private void passFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_passFocusLost
         String passInput = pass.getText();
 
@@ -405,6 +371,82 @@ public class register extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_passActionPerformed
 
+    private void userFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_userFocusLost
+String lname = user.getText();
+
+        if (lname.isEmpty()) {
+            user.setForeground(mycolor);
+            us.setText("This field is required");
+            us.setForeground(mycolor);
+        } else {
+            user.setForeground(Color.BLACK);
+            us.setText("");
+            us.setForeground(mycolor);
+        }
+
+        user.repaint();        
+    }//GEN-LAST:event_userFocusLost
+
+    private void userActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_userActionPerformed
+
+    private void firstname2FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_firstname2FocusLost
+        String fname = firstname2.getText();
+
+        if (fname.isEmpty()) {
+            firstname2.setForeground(mycolor);
+            fn.setText("This field is required");
+            fn.setForeground(mycolor);
+        } else {
+            firstname2.setForeground(Color.BLACK);
+            fn.setText("");
+            fn.setForeground(mycolor);
+        }
+
+        firstname2.repaint();      
+    }//GEN-LAST:event_firstname2FocusLost
+
+    private void firstname2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_firstname2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_firstname2ActionPerformed
+    
+    
+    private void emailFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_emailFocusLost
+        
+        
+        String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
+        String emailInput = email.getText();
+
+        if (emailInput.isEmpty()) {
+        
+
+            email.setForeground(Color.getColor(emailInput, mycolor));
+            errorLabelEmail.setText("Email is required");
+            errorLabelEmail.setForeground(Color.getColor(emailInput, mycolor) );
+
+        } else if (!emailInput.matches(emailRegex)) {
+
+            errorLabelEmail.setForeground(Color.getColor(emailInput, mycolor) );
+            errorLabelEmail.setText("Email is invalid");
+            errorLabelEmail.setForeground(Color.getColor(emailInput, mycolor) );
+        
+
+        }
+        else {
+
+            email.setForeground(Color.BLACK);
+            errorLabelEmail.setText("Email valid");
+            errorLabelEmail.setForeground(Color.BLACK);
+        }
+
+        email.repaint();
+    }//GEN-LAST:event_emailFocusLost
+
+    private void emailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emailActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_emailActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -444,9 +486,9 @@ public class register extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPasswordField cpass;
     private javax.swing.JLabel cpw;
-    private javax.swing.JLabel em;
-    private javax.swing.JPasswordField email;
-    private javax.swing.JTextField firstname;
+    private javax.swing.JTextField email;
+    private javax.swing.JLabel errorLabelEmail;
+    private javax.swing.JTextField firstname2;
     private javax.swing.JLabel fn;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
@@ -463,13 +505,13 @@ public class register extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPasswordField lastname;
+    private javax.swing.JTextField lastname;
     private javax.swing.JLabel ln;
     private javax.swing.JPasswordField pass;
     private javax.swing.JTextField phonenumber;
     private javax.swing.JLabel pn1;
     private javax.swing.JLabel pw;
     private javax.swing.JLabel us;
-    private javax.swing.JPasswordField user;
+    private javax.swing.JTextField user;
     // End of variables declaration//GEN-END:variables
 }
