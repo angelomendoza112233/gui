@@ -60,6 +60,7 @@ public class register extends javax.swing.JFrame {
         em = new javax.swing.JLabel();
         us = new javax.swing.JLabel();
         pw = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(234, 207, 181));
@@ -79,7 +80,7 @@ public class register extends javax.swing.JFrame {
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/angelo-removebg-preview.png"))); // NOI18N
         jLabel2.setText("jLabel2");
-        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(-40, 140, 280, 190));
+        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(-40, 150, 280, 190));
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icons8-back-50 (1).png"))); // NOI18N
         jLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -87,10 +88,12 @@ public class register extends javax.swing.JFrame {
                 jLabel3MouseClicked(evt);
             }
         });
-        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 60, 50));
+        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 50, 50));
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 200, 300));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 200, 320));
 
+        firstname.setBackground(new java.awt.Color(222, 180, 138));
+        firstname.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         firstname.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 firstnameFocusLost(evt);
@@ -103,6 +106,8 @@ public class register extends javax.swing.JFrame {
         });
         jPanel1.add(firstname, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 70, 130, 20));
 
+        cpass.setBackground(new java.awt.Color(222, 180, 138));
+        cpass.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         cpass.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 cpassFocusLost(evt);
@@ -110,6 +115,8 @@ public class register extends javax.swing.JFrame {
         });
         jPanel1.add(cpass, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 220, 130, 20));
 
+        phonenumber.setBackground(new java.awt.Color(222, 180, 138));
+        phonenumber.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         phonenumber.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 phonenumberFocusLost(evt);
@@ -122,6 +129,9 @@ public class register extends javax.swing.JFrame {
         });
         jPanel1.add(phonenumber, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 120, 130, 20));
 
+        lastname.setBackground(new java.awt.Color(222, 180, 138));
+        lastname.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        lastname.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         lastname.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 lastnameFocusLost(evt);
@@ -129,6 +139,8 @@ public class register extends javax.swing.JFrame {
         });
         jPanel1.add(lastname, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 70, 130, 20));
 
+        email.setBackground(new java.awt.Color(222, 180, 138));
+        email.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         email.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 emailFocusLost(evt);
@@ -136,6 +148,8 @@ public class register extends javax.swing.JFrame {
         });
         jPanel1.add(email, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 120, 130, 20));
 
+        user.setBackground(new java.awt.Color(222, 180, 138));
+        user.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         user.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 userFocusLost(evt);
@@ -143,9 +157,16 @@ public class register extends javax.swing.JFrame {
         });
         jPanel1.add(user, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 170, 130, 20));
 
+        pass.setBackground(new java.awt.Color(222, 180, 138));
+        pass.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         pass.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
                 passFocusLost(evt);
+            }
+        });
+        pass.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                passActionPerformed(evt);
             }
         });
         jPanel1.add(pass, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 220, 130, 20));
@@ -201,16 +222,26 @@ public class register extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 260, 170, 30));
-        jPanel1.add(cpw, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 240, 130, -1));
+        jPanel1.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 250, 170, 30));
+        jPanel1.add(cpw, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 240, 150, 10));
         jPanel1.add(fn, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 90, 130, 10));
         jPanel1.add(ln, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 90, 120, 10));
         jPanel1.add(pn1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 140, 130, -1));
         jPanel1.add(em, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 140, 130, -1));
         jPanel1.add(us, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 190, 130, -1));
-        jPanel1.add(pw, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 240, 130, -1));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 545, 300));
+        pw.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
+        jPanel1.add(pw, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 240, 220, 10));
+
+        jLabel4.setText("Already have an account? Login here");
+        jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel4MouseClicked(evt);
+            }
+        });
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 300, -1, -1));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 545, 320));
 
         pack();
         setLocationRelativeTo(null);
@@ -341,7 +372,7 @@ public class register extends javax.swing.JFrame {
         } else if (passInput.length() < 8) {
 
             pass.setForeground(mycolor);
-            pw.setText("Password toomycolor short. Must be 8 characters or more");
+            pw.setText("Password too short. 8 characters or more");
             pw.setForeground(mycolor);
         } else {
             pass.setForeground(Color.BLACK);
@@ -363,6 +394,16 @@ public class register extends javax.swing.JFrame {
         log.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_jLabel3MouseClicked
+
+    private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
+        login log = new login();
+        log.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jLabel4MouseClicked
+
+    private void passActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_passActionPerformed
 
     /**
      * @param args the command line arguments
@@ -419,6 +460,7 @@ public class register extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPasswordField lastname;

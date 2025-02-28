@@ -136,13 +136,13 @@ public class login extends javax.swing.JFrame {
             }
         });
         jPanel2.add(password, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 170, 190, 20));
-        jPanel2.add(errorlabelpass, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 190, 170, 10));
+        jPanel2.add(errorlabelpass, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 190, 170, 10));
         jPanel2.add(errorlabeluser, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 130, 160, -1));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 270, 300));
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/angelo-removebg-preview.png"))); // NOI18N
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 140, 380, 180));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 160, 380, 180));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 630, 300));
 
