@@ -92,6 +92,9 @@ public class login extends javax.swing.JFrame {
 
         jPanel3.setBackground(new java.awt.Color(162, 158, 152));
         jPanel3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel3MouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 jPanel3MouseEntered(evt);
             }
@@ -173,16 +176,7 @@ public class login extends javax.swing.JFrame {
 
     private void jPanel3MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel3MouseEntered
         jPanel3.setBackground(bodycolor);
-        
-        
-        if(loginAcc(username.getText(),password.getText())){    
-            JOptionPane.showMessageDialog(null,"Login Success!");
-            admindashboard ads = new admindashboard();  
-            ads.setVisible(true);
-        this.dispose();
-        }else{
-        JOptionPane.showMessageDialog(null,"Login failed!");
-        }
+ 
     }//GEN-LAST:event_jPanel3MouseEntered
 
     private void jPanel3MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel3MouseExited
@@ -246,6 +240,17 @@ public class login extends javax.swing.JFrame {
         pms.setBackground(panel);
 
     }//GEN-LAST:event_pmsMouseExited
+
+    private void jPanel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel3MouseClicked
+       if(loginAcc(username.getText(),password.getText())){    
+            JOptionPane.showMessageDialog(null,"Login Success!");
+            admindashboard ads = new admindashboard();  
+            ads.setVisible(true);
+        this.dispose();
+        }else{
+        JOptionPane.showMessageDialog(null,"Login failed!");
+        }
+    }//GEN-LAST:event_jPanel3MouseClicked
 
     /**
      * @param args the command line arguments

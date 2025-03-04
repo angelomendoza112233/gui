@@ -60,7 +60,9 @@ public class register extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         user = new javax.swing.JTextField();
         firstname2 = new javax.swing.JTextField();
-        email = new javax.swing.JTextField();
+        email1 = new javax.swing.JTextField();
+        jLabel5 = new javax.swing.JLabel();
+        acct = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(234, 207, 181));
@@ -113,7 +115,7 @@ public class register extends javax.swing.JFrame {
                 cpassFocusLost(evt);
             }
         });
-        jPanel1.add(cpass, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 220, 130, 20));
+        jPanel1.add(cpass, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 220, 130, 20));
 
         phonenumber.setBackground(new java.awt.Color(222, 180, 138));
         phonenumber.setBorder(new javax.swing.border.MatteBorder(null));
@@ -146,7 +148,7 @@ public class register extends javax.swing.JFrame {
         jLabel10.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel10.setText("Confirm Password");
-        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 200, 130, 20));
+        jPanel1.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 200, 130, 20));
 
         jLabel11.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -171,7 +173,7 @@ public class register extends javax.swing.JFrame {
         jLabel15.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel15.setText("Username");
-        jPanel1.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 150, 130, 20));
+        jPanel1.add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 150, 130, 20));
 
         jLabel16.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel16.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -200,7 +202,7 @@ public class register extends javax.swing.JFrame {
         jPanel1.add(ln, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 90, 120, 10));
         jPanel1.add(pn1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 140, 130, -1));
         jPanel1.add(errorLabelEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 140, 130, -1));
-        jPanel1.add(us, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 190, 130, -1));
+        jPanel1.add(us, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 190, 110, 10));
 
         pw.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         jPanel1.add(pw, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 240, 220, 10));
@@ -225,7 +227,7 @@ public class register extends javax.swing.JFrame {
                 userActionPerformed(evt);
             }
         });
-        jPanel1.add(user, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 170, 130, 20));
+        jPanel1.add(user, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 170, 130, 20));
 
         firstname2.setBackground(new java.awt.Color(222, 180, 138));
         firstname2.setBorder(new javax.swing.border.MatteBorder(null));
@@ -241,19 +243,26 @@ public class register extends javax.swing.JFrame {
         });
         jPanel1.add(firstname2, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 70, 130, 20));
 
-        email.setBackground(new java.awt.Color(222, 180, 138));
-        email.setBorder(new javax.swing.border.MatteBorder(null));
-        email.addFocusListener(new java.awt.event.FocusAdapter() {
+        email1.setBackground(new java.awt.Color(222, 180, 138));
+        email1.setBorder(new javax.swing.border.MatteBorder(null));
+        email1.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
-                emailFocusLost(evt);
+                email1FocusLost(evt);
             }
         });
-        email.addActionListener(new java.awt.event.ActionListener() {
+        email1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                emailActionPerformed(evt);
+                email1ActionPerformed(evt);
             }
         });
-        jPanel1.add(email, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 120, 130, 20));
+        jPanel1.add(email1, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 120, 130, 20));
+
+        jLabel5.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
+        jLabel5.setText("Account Type");
+        jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 150, -1, -1));
+
+        acct.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Admin", "user", " " }));
+        jPanel1.add(acct, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 170, 130, 20));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 545, 320));
 
@@ -412,40 +421,13 @@ String lname = user.getText();
     }//GEN-LAST:event_firstname2ActionPerformed
     
     
-    private void emailFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_emailFocusLost
-        
-        
-        String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
-        String emailInput = email.getText();
-
-        if (emailInput.isEmpty()) {
-        
-
-            email.setForeground(Color.getColor(emailInput, mycolor));
-            errorLabelEmail.setText("Email is required");
-            errorLabelEmail.setForeground(Color.getColor(emailInput, mycolor) );
-
-        } else if (!emailInput.matches(emailRegex)) {
-
-            errorLabelEmail.setForeground(Color.getColor(emailInput, mycolor) );
-            errorLabelEmail.setText("Email is invalid");
-            errorLabelEmail.setForeground(Color.getColor(emailInput, mycolor) );
-        
-
-        }
-        else {
-
-            email.setForeground(Color.BLACK);
-            errorLabelEmail.setText("Email valid");
-            errorLabelEmail.setForeground(Color.BLACK);
-        }
-
-        email.repaint();
-    }//GEN-LAST:event_emailFocusLost
-
-    private void emailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_emailActionPerformed
+    private void email1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_email1FocusLost
         // TODO add your handling code here:
-    }//GEN-LAST:event_emailActionPerformed
+    }//GEN-LAST:event_email1FocusLost
+
+    private void email1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_email1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_email1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -484,9 +466,10 @@ String lname = user.getText();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> acct;
     private javax.swing.JPasswordField cpass;
     private javax.swing.JLabel cpw;
-    private javax.swing.JTextField email;
+    private javax.swing.JTextField email1;
     private javax.swing.JLabel errorLabelEmail;
     private javax.swing.JTextField firstname2;
     private javax.swing.JLabel fn;
@@ -503,6 +486,7 @@ String lname = user.getText();
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JTextField lastname;
