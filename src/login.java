@@ -1,5 +1,10 @@
 
+import config.dbConnector;
 import java.awt.Color;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -19,6 +24,18 @@ public class login extends javax.swing.JFrame {
     public login() {
         initComponents();
     }
+    
+     public static boolean loginAcc(String username, String password) {
+    dbConnector connector = new dbConnector();
+    try {
+        String query = "SELECT * FROM amanagement WHERE u_username = '" + username + "' AND u_password = '" + password + "'";
+        ResultSet resultSet = connector.getData(query);
+        return resultSet.next();
+    } catch (SQLException ex) {
+        return false;
+    }
+
+     }
         Color mycolo = new Color(202,70,70);
 
     Color mycolor = new Color(158,146,100);
@@ -148,7 +165,7 @@ public class login extends javax.swing.JFrame {
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/angelo-removebg-preview.png"))); // NOI18N
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 150, 380, 180));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 630, 300));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 620, 300));
 
         pack();
         setLocationRelativeTo(null);
@@ -156,6 +173,16 @@ public class login extends javax.swing.JFrame {
 
     private void jPanel3MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel3MouseEntered
         jPanel3.setBackground(bodycolor);
+        
+        
+        if(loginAcc(username.getText(),password.getText())){    
+            JOptionPane.showMessageDialog(null,"Login Success!");
+            admindashboard ads = new admindashboard();  
+            ads.setVisible(true);
+        this.dispose();
+        }else{
+        JOptionPane.showMessageDialog(null,"Login failed!");
+        }
     }//GEN-LAST:event_jPanel3MouseEntered
 
     private void jPanel3MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel3MouseExited

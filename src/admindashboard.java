@@ -8,12 +8,12 @@ import java.awt.Color;
  *
  * @author SCC32
  */
-public class dashboard extends javax.swing.JFrame {
+public class admindashboard extends javax.swing.JFrame {
 
     /**
      * Creates new form dashboard
      */
-    public dashboard() {
+    public admindashboard() {
         initComponents();
     }
      Color mycolor = new Color(158,146,100);
@@ -38,11 +38,11 @@ public class dashboard extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         REPORTS = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
         USER = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
-        jDesktopPane1 = new javax.swing.JDesktopPane();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -105,6 +105,11 @@ public class dashboard extends javax.swing.JFrame {
         jLabel2.setText("REPORTS");
         REPORTS.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 11, 120, 19));
 
+        jLabel3.setFont(new java.awt.Font("Lucida Console", 1, 14)); // NOI18N
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel3.setText("REPORTS");
+        REPORTS.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 11, 120, 19));
+
         jPanel3.add(REPORTS, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 210, 140, 40));
 
         USER.setBackground(new java.awt.Color(158, 146, 100));
@@ -137,10 +142,6 @@ public class dashboard extends javax.swing.JFrame {
         jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 440, 30));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 0, 440, 50));
-
-        jDesktopPane1.setBackground(new java.awt.Color(211, 180, 158));
-        jDesktopPane1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel1.add(jDesktopPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 50, 440, 300));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 580, 350));
 
@@ -190,21 +191,23 @@ DASHBOARD.setBackground(bodycolor);
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(dashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(admindashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(dashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(admindashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(dashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(admindashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(dashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(admindashboard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new dashboard().setVisible(true);
+                new admindashboard().setVisible(true);
             }
         });
     }
@@ -213,9 +216,9 @@ DASHBOARD.setBackground(bodycolor);
     private javax.swing.JPanel DASHBOARD;
     private javax.swing.JPanel REPORTS;
     private javax.swing.JPanel USER;
-    private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
