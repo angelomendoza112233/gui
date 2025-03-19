@@ -1,10 +1,12 @@
 
 import config.dbConnector;
 import java.awt.Color;
+import javax.swing.JOptionPane;
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import javax.swing.JOptionPane;
+
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -24,24 +26,38 @@ public class login extends javax.swing.JFrame {
     public login() {
         initComponents();
     }
-    
-     public static boolean loginAcc(String username, String password) {
-    dbConnector connector = new dbConnector();
-    try {
-        String query = "SELECT * FROM amanagement WHERE u_username = '" + username + "' AND u_password = '" + password + "'";
-        ResultSet resultSet = connector.getData(query);
-        return resultSet.next();
+
+    public static class LoginHandler {
+
+        public static String[] loginAcc(String username, String password) {
+    String query = "SELECT u_roles, u_status FROM amanagement WHERE u_username = ? AND u_password = ?";
+
+    try (Connection conn = dbConnector.getConnection();
+         PreparedStatement pstmt = conn.prepareStatement(query)) {
+
+        pstmt.setString(1, username);
+        pstmt.setString(2, password);
+
+        try (ResultSet resultSet = pstmt.executeQuery()) {
+            if (resultSet.next()) {
+                // Return acc_type and acc_status
+                return new String[]{resultSet.getString("u_roles"), resultSet.getString("u_status")};
+            }
+        }
+
     } catch (SQLException ex) {
-        return false;
+        System.err.println("Login Error: " + ex.getMessage());
     }
 
-     }
-        Color mycolo = new Color(202,70,70);
+    return null; // Return null if login fails
+}
+    }
+    Color mycolo = new Color(202, 70, 70);
 
-    Color mycolor = new Color(158,146,100);
-     Color headcolor = new Color(234,207,181);
-     Color bodycolor = new Color(11,180,158);
-     Color panel = new Color (162,158,152);
+    Color mycolor = new Color(158, 146, 100);
+    Color headcolor = new Color(234, 207, 181);
+    Color bodycolor = new Color(11, 180, 158);
+    Color panel = new Color(162, 158, 152);
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -176,12 +192,12 @@ public class login extends javax.swing.JFrame {
 
     private void jPanel3MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel3MouseEntered
         jPanel3.setBackground(bodycolor);
- 
+
     }//GEN-LAST:event_jPanel3MouseEntered
 
     private void jPanel3MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel3MouseExited
         jPanel3.setBackground(panel);
-        
+
     }//GEN-LAST:event_jPanel3MouseExited
 
     private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
@@ -225,11 +241,11 @@ public class login extends javax.swing.JFrame {
     }//GEN-LAST:event_passwordFocusLost
 
     private void jLabel6MouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseEntered
-        
+
     }//GEN-LAST:event_jLabel6MouseEntered
 
     private void jLabel6MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseExited
-        
+
     }//GEN-LAST:event_jLabel6MouseExited
 
     private void pmsMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_pmsMouseEntered
@@ -242,14 +258,48 @@ public class login extends javax.swing.JFrame {
     }//GEN-LAST:event_pmsMouseExited
 
     private void jPanel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel3MouseClicked
-       if(loginAcc(username.getText(),password.getText())){    
-            JOptionPane.showMessageDialog(null,"Login Success!");
-            admindashboard ads = new admindashboard();  
-            ads.setVisible(true);
-        this.dispose();
-        }else{
-        JOptionPane.showMessageDialog(null,"Login failed!");
+        
+        String u_username = username.getText().trim();
+        String u_password = password.getText().trim();
+
+        if (u_username.isEmpty() || u_password.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Username and/or password cannot be empty.", "Login Error", JOptionPane.ERROR_MESSAGE);
+            username.requestFocus();
+            return;
         }
+
+        String[] loginData = LoginHandler.loginAcc(u_username, u_password);
+        if (loginData == null) {
+            JOptionPane.showMessageDialog(this, "Invalid username or password.", "Login Failed", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        String acct = loginData[0];
+        String accStatus = loginData[1];
+
+        if (!"active".equalsIgnoreCase(accStatus)) {
+            JOptionPane.showMessageDialog(this, "Your account is still pending. Please contact the administrator.", "Login Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        if (acct != null) {
+            if ("admin".equalsIgnoreCase(acct)) {
+                new admindashboard().setVisible(true);
+            } else if ("applicant".equalsIgnoreCase(acct)) {
+                new applicant().setVisible(true);
+            } else if ("staff".equalsIgnoreCase(acct)) {
+                new staff().setVisible(true);
+            } else {
+                JOptionPane.showMessageDialog(this, "Unknown user type!", "Login Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            this.dispose(); // Close login window
+        } else {
+            JOptionPane.showMessageDialog(this, "Incorrect username or password.", "Login Error", JOptionPane.ERROR_MESSAGE);
+            password.requestFocus();
+        }
+
+
     }//GEN-LAST:event_jPanel3MouseClicked
 
     /**

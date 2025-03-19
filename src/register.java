@@ -1,5 +1,12 @@
 
+import config.dbConnector;
 import java.awt.Color;
+import java.awt.Font;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -19,6 +26,31 @@ public class register extends javax.swing.JFrame {
     public register() {
         initComponents();
     }
+    private boolean emailExists(String email) {
+
+        dbConnector con = new dbConnector();
+
+        try {
+            String query = "SELECT * FROM user WHERE u_email = ?";
+            PreparedStatement pstmt = con.getConnection().prepareStatement(query);
+            pstmt.setString(1, email.trim());
+            ResultSet resultSet = pstmt.executeQuery();
+
+            if (resultSet.next()) {
+
+                return true;
+            }
+
+        } catch (SQLException ex) {
+            System.out.println("" + ex);
+
+        }
+
+        return false;
+    
+    
+}
+
      Color mycolor = new Color(202,70,70);
      Color headcolor = new Color(234,207,181);
      Color bodycolor = new Color(11,180,158);
@@ -261,7 +293,12 @@ public class register extends javax.swing.JFrame {
         jLabel5.setText("Account Type");
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 150, -1, -1));
 
-        acct.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Admin", "user", " " }));
+        acct.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "admin", "applicant", "staff", "" }));
+        acct.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                acctActionPerformed(evt);
+            }
+        });
         jPanel1.add(acct, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 170, 130, 20));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 545, 320));
@@ -362,6 +399,26 @@ public class register extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
 
+
+if (signUpValidation()) {
+
+  dbConnector connector = new dbConnector();
+
+    connector.insertData("INSERT INTO amanagement (u_firstname, u_lastname, u_email, u_contactnumber,u_username, u_password, u_type, u_status) " +
+            "VALUES ('" + firstname2.getText() + "','" + lastname.getText() + "','" + email1.getText() + "'," +
+            "'" + phonenumber.getText() + "','" + user.getText()+ "','" + pass.getText() + "', 'User', 'Pending')");
+
+    JOptionPane.showMessageDialog(this, "Registration successful!", "Success", JOptionPane.INFORMATION_MESSAGE);
+
+    login lg = new login();
+    lg.setVisible(true);
+    this.dispose();
+
+} else {
+
+    JOptionPane.showMessageDialog(this, "Registration fail!", "fail", JOptionPane.INFORMATION_MESSAGE);
+
+}
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
@@ -420,15 +477,150 @@ String lname = user.getText();
         // TODO add your handling code here:
     }//GEN-LAST:event_firstname2ActionPerformed
     
-    
+     
     private void email1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_email1FocusLost
-        // TODO add your handling code here:
+      
+        
+        String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
+        String emailInput = email1.getText();
+
+        if (emailInput.isEmpty()) {
+
+            errorLabelEmail.setText("Email is required");
+            errorLabelEmail.setForeground(Color.getColor(emailInput, mycolor));
+
+        } else if (!emailInput.matches(emailRegex)) {
+
+            email1.setForeground(Color.getColor(emailInput, mycolor));
+            errorLabelEmail.setText("Email is invalid");
+            errorLabelEmail.setForeground(Color.getColor(emailInput, mycolor));
+        } else if (emailExists(emailInput)) {
+
+            email1.setForeground(Color.getColor(emailInput, mycolor));
+            errorLabelEmail.setText("Email already exists");
+            errorLabelEmail.setForeground(Color.getColor(emailInput, mycolor));
+
+        } else {
+
+            email1.setForeground(Color.GREEN);
+            errorLabelEmail.setText("Email valid");
+            errorLabelEmail.setForeground(Color.GREEN);
+        }
+
+        email1.repaint();
+
+     
     }//GEN-LAST:event_email1FocusLost
 
     private void email1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_email1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_email1ActionPerformed
 
+    private void acctActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_acctActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_acctActionPerformed
+ private boolean signUpValidation() {
+        boolean valid = true;
+ 
+ String lname = lastname.getText();
+
+        if (lname.isEmpty()) {
+
+            lastname.setForeground(mycolor);
+            ln.setText("This field is required");
+            ln.setForeground(mycolor);
+
+        } else {
+            lastname.setForeground(Color.BLACK);
+            ln.setText("");
+            ln.setForeground(mycolor);
+        }
+
+        lastname.repaint();
+        
+        
+        String fname = firstname2.getText();
+
+        if (fname.isEmpty()) {
+            firstname2.setForeground(mycolor);
+            fn.setText("This field is required");
+            fn.setForeground(mycolor);
+        } else {
+            firstname2.setForeground(Color.BLACK);
+            fn.setText("");
+            fn.setForeground(mycolor);
+        }
+
+        firstname2.repaint();      
+        
+         String passInput = pass.getText();
+
+        if (passInput.isEmpty()) {
+            pass.setForeground(mycolor);
+            pw.setText("Password is required");
+            pw.setForeground(mycolor);
+        } else if (passInput.length() < 8) {
+
+            pass.setForeground(mycolor);
+            pw.setText("Password too short. 8 characters or more");
+            pw.setForeground(mycolor);
+        } else {
+            pass.setForeground(Color.BLACK);
+            pw.setText("");
+        }
+        pass.repaint();
+        
+        String lname1 = user.getText();
+
+        if (lname1.isEmpty()) {
+            user.setForeground(mycolor);
+            us.setText("This field is required");
+            us.setForeground(mycolor);
+        } else {
+            user.setForeground(Color.BLACK);
+            us.setText("");
+            us.setForeground(mycolor);
+        }
+
+        user.repaint();   
+        String phoneRegex = "^[0-9]{11}$";
+        String phoneInput = phonenumber.getText();
+
+        if (phoneInput.isEmpty()) {
+
+            phonenumber.setForeground(mycolor);
+            pn1.setText("Number is required");
+            pn1.setForeground(mycolor);
+
+        } else if (!phoneInput.matches(phoneRegex)) {
+
+            phonenumber.setForeground(mycolor);
+            pn1.setText("Number is invalid");
+            pn1.setForeground(mycolor);
+        } else {
+
+            phonenumber.setForeground(Color.BLACK);
+            pn1.setText("");
+
+        }
+
+        phonenumber.repaint();
+        String lname5 = cpass.getText();
+
+        if (lname5.isEmpty()) {
+            cpass.setForeground(mycolor);
+            cpw.setText("This field is required");
+            cpw.setForeground(mycolor);
+        } else {
+            cpass.setForeground(Color.BLACK);
+            cpw.setText("");
+            cpw.setForeground(mycolor);
+        }
+
+        cpass.repaint();
+ return valid;
+ }
+        
     /**
      * @param args the command line arguments
      */

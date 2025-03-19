@@ -11,7 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-
+import java.sql.*;
 /**
  *
  * @author mendo
@@ -20,6 +20,9 @@ public class dbConnector {
     
     private Connection connect;
 
+    private static final String DB_URL = "jdbc:mysql://localhost:3306/amanagement";
+    private static final String DB_USER = "root";
+    private static final String DB_PASSWORD = "";
        // constructor to connect to our database
         public dbConnector(){
             try{
@@ -52,5 +55,18 @@ public class dbConnector {
             }
             return result;
         }
-    
+ public static Connection getConnection() throws SQLException {
+        try {
+            return DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
+        } catch (SQLException ex) {
+            System.err.println("Database Connection Error: " + ex.getMessage());
+            throw ex; // Rethrow for higher-level handling
+     
+        }
+        
+    }
+        
 }
+
+
+

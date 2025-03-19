@@ -138,7 +138,7 @@ public class admindashboard extends javax.swing.JFrame {
 
         jLabel5.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel5.setText("WELLCOME TO HR MANAGEMENT SYSTEM");
+        jLabel5.setText("WELLCOME TO AGIENCY MANAGEMENT SYSTEM");
         jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 440, 30));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 0, 440, 50));
