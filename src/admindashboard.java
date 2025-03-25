@@ -115,6 +115,9 @@ public class admindashboard extends javax.swing.JFrame {
         USER.setBackground(new java.awt.Color(158, 146, 100));
         USER.setToolTipText("");
         USER.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                USERMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 USERMouseEntered(evt);
             }
@@ -127,6 +130,11 @@ public class admindashboard extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Lucida Console", 1, 14)); // NOI18N
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("USER");
+        jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel4MouseClicked(evt);
+            }
+        });
         USER.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 120, 19));
 
         jPanel3.add(USER, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 150, 140, 40));
@@ -173,6 +181,15 @@ DASHBOARD.setBackground(bodycolor);
     private void USERMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_USERMouseExited
                 USER.setBackground(mycolor);
     }//GEN-LAST:event_USERMouseExited
+
+    private void USERMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_USERMouseClicked
+        user1 us =new user1();
+        us.setVisible(true);
+    }//GEN-LAST:event_USERMouseClicked
+
+    private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
+   
+    }//GEN-LAST:event_jLabel4MouseClicked
 
     /**
      * @param args the command line arguments

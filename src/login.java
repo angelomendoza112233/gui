@@ -1,56 +1,44 @@
 
 import config.dbConnector;
+import gfx.RoundedTextField;
 import java.awt.Color;
 import javax.swing.JOptionPane;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javax.swing.*;
 
-
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/**
- *
- * @author SCC32
- */
 public class login extends javax.swing.JFrame {
 
-    /**
-     * Creates new form NewJFrame
-     */
     public login() {
         initComponents();
-    }
 
+    }
     public static class LoginHandler {
-
         public static String[] loginAcc(String username, String password) {
-    String query = "SELECT u_roles, u_status FROM amanagement WHERE u_username = ? AND u_password = ?";
+            String query = "SELECT u_roles, u_status FROM user WHERE u_username = ? AND u_password = ?";
+            
+            try (Connection conn = dbConnector.getConnection();
+                 PreparedStatement pstmt = conn.prepareStatement(query)) {
 
-    try (Connection conn = dbConnector.getConnection();
-         PreparedStatement pstmt = conn.prepareStatement(query)) {
+                pstmt.setString(1, username);
+                pstmt.setString(2, password);
 
-        pstmt.setString(1, username);
-        pstmt.setString(2, password);
+                try (ResultSet resultSet = pstmt.executeQuery()) {
+                    if (resultSet.next()) {
+                        return new String[]{resultSet.getString("u_roles"), resultSet.getString("u_status")};
+                    }
+                }
 
-        try (ResultSet resultSet = pstmt.executeQuery()) {
-            if (resultSet.next()) {
-                // Return acc_type and acc_status
-                return new String[]{resultSet.getString("u_roles"), resultSet.getString("u_status")};
+            } catch (SQLException ex) {
+                System.err.println("Login Error: " + ex.getMessage());
             }
+
+            return null; // Return null if login fails
         }
+    
 
-    } catch (SQLException ex) {
-        System.err.println("Login Error: " + ex.getMessage());
-    }
-
-    return null; // Return null if login fails
-}
     }
     Color mycolo = new Color(202, 70, 70);
 
@@ -151,7 +139,7 @@ public class login extends javax.swing.JFrame {
                 jLabel6MouseExited(evt);
             }
         });
-        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 250, 200, 50));
+        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 250, 200, 50));
 
         username.setToolTipText("Username");
         username.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
@@ -179,12 +167,12 @@ public class login extends javax.swing.JFrame {
         jPanel2.add(errorlabelpass, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 190, 170, 10));
         jPanel2.add(errorlabeluser, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 130, 160, -1));
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 270, 300));
-
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/angelo-removebg-preview.png"))); // NOI18N
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 150, 380, 180));
+        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 260, 510, 300));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 620, 300));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 320, 450));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 810, 450));
 
         pack();
         setLocationRelativeTo(null);
@@ -201,9 +189,10 @@ public class login extends javax.swing.JFrame {
     }//GEN-LAST:event_jPanel3MouseExited
 
     private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
-        register reg = new register();
-        reg.setVisible(true);
-        this.dispose();
+        register reg =new register();     
+       reg.setVisible(true);
+       
+       
     }//GEN-LAST:event_jLabel6MouseClicked
 
     private void usernameFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_usernameFocusLost
@@ -305,39 +294,12 @@ public class login extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-        //</editor-fold>
+   public static void main(String[] args) {
+    SwingUtilities.invokeLater(() -> {
+        new login().setVisible(true);
+    });
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new login().setVisible(true);
-            }
-        });
-    }
-
+}
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel errorlabelpass;
     private javax.swing.JLabel errorlabeluser;
