@@ -34,13 +34,13 @@ public class admindashboard extends javax.swing.JFrame {
         jTable1 = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
-        DASHBOARD = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
         REPORTS = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         USER = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
 
@@ -60,6 +60,7 @@ public class admindashboard extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(140, 125, 80));
         setFocusable(false);
+        setUndecorated(true);
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -68,25 +69,6 @@ public class admindashboard extends javax.swing.JFrame {
 
         jPanel3.setBackground(new java.awt.Color(158, 146, 100));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        DASHBOARD.setBackground(new java.awt.Color(158, 146, 100));
-        DASHBOARD.setToolTipText("");
-        DASHBOARD.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                DASHBOARDMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                DASHBOARDMouseExited(evt);
-            }
-        });
-        DASHBOARD.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel1.setFont(new java.awt.Font("Lucida Console", 1, 14)); // NOI18N
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("DASHBOARD");
-        DASHBOARD.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 11, 120, 19));
-
-        jPanel3.add(DASHBOARD, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 140, 40));
 
         REPORTS.setBackground(new java.awt.Color(158, 146, 100));
         REPORTS.setToolTipText("");
@@ -110,7 +92,7 @@ public class admindashboard extends javax.swing.JFrame {
         jLabel3.setText("REPORTS");
         REPORTS.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 11, 120, 19));
 
-        jPanel3.add(REPORTS, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 210, 140, 40));
+        jPanel3.add(REPORTS, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 200, 140, 40));
 
         USER.setBackground(new java.awt.Color(158, 146, 100));
         USER.setToolTipText("");
@@ -137,9 +119,17 @@ public class admindashboard extends javax.swing.JFrame {
         });
         USER.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 120, 19));
 
-        jPanel3.add(USER, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 150, 140, 40));
+        jPanel3.add(USER, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 140, 140, 40));
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 140, 350));
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icons8-dashboard-layout-96.png"))); // NOI18N
+        jPanel3.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, -1, -1));
+
+        jLabel1.setFont(new java.awt.Font("Lucida Console", 1, 14)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("DASHBOARD");
+        jPanel3.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 120, 19));
+
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 140, 450));
 
         jPanel2.setBackground(new java.awt.Color(234, 207, 181));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -147,24 +137,15 @@ public class admindashboard extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel5.setText("WELLCOME TO AGIENCY MANAGEMENT SYSTEM");
-        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 440, 30));
+        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 670, 30));
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 0, 440, 50));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 0, 670, 50));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 580, 350));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 820, 450));
 
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
-
-    private void DASHBOARDMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DASHBOARDMouseEntered
-DASHBOARD.setBackground(bodycolor);
-    }//GEN-LAST:event_DASHBOARDMouseEntered
-
-    private void DASHBOARDMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DASHBOARDMouseExited
-        DASHBOARD.setBackground(mycolor);
-
-    }//GEN-LAST:event_DASHBOARDMouseExited
 
     private void REPORTSMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_REPORTSMouseEntered
         REPORTS.setBackground(bodycolor);
@@ -185,6 +166,7 @@ DASHBOARD.setBackground(bodycolor);
     private void USERMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_USERMouseClicked
         user1 us =new user1();
         us.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_USERMouseClicked
 
     private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
@@ -230,7 +212,6 @@ DASHBOARD.setBackground(bodycolor);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JPanel DASHBOARD;
     private javax.swing.JPanel REPORTS;
     private javax.swing.JPanel USER;
     private javax.swing.JLabel jLabel1;
@@ -238,6 +219,7 @@ DASHBOARD.setBackground(bodycolor);
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

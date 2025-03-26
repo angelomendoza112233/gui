@@ -52,6 +52,9 @@ Color mycolor = new Color(158,146,100);
         DASHBOARD.setBackground(new java.awt.Color(158, 146, 100));
         DASHBOARD.setToolTipText("");
         DASHBOARD.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                DASHBOARDMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 DASHBOARDMouseEntered(evt);
             }
@@ -95,6 +98,9 @@ Color mycolor = new Color(158,146,100);
         USER.setBackground(new java.awt.Color(158, 146, 100));
         USER.setToolTipText("");
         USER.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                USERMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 USERMouseEntered(evt);
             }
@@ -171,6 +177,16 @@ Color mycolor = new Color(158,146,100);
         USER.setBackground(mycolor);
     }//GEN-LAST:event_USERMouseExited
 
+    private void DASHBOARDMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DASHBOARDMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_DASHBOARDMouseClicked
+
+    private void USERMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_USERMouseClicked
+        user1 ur =new user1();
+        ur.setVisible(true);
+        this.dispose(); 
+    }//GEN-LAST:event_USERMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -202,6 +218,7 @@ Color mycolor = new Color(158,146,100);
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
+                
                 new applicant().setVisible(true);
             }
         });
