@@ -11,6 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import javax.swing.JOptionPane;
 
 public class dbConnector {
     
@@ -70,6 +71,44 @@ public class dbConnector {
             System.err.println("SQL Insert Error: " + ex.getMessage());
         }
         return result;
+    }
+    public void deleteData(String sql, Object... values) {
+    try (PreparedStatement pstmt = connect.prepareStatement(sql)) {
+
+        // Loop through values and bind them to the query
+        for (int i = 0; i < values.length; i++) {
+            if (values[i] instanceof Integer) {
+                pstmt.setInt(i + 1, (Integer) values[i]);
+            } else {
+                pstmt.setString(i + 1, values[i].toString());
+            }
+        }
+
+        int rowsAffected = pstmt.executeUpdate();
+        if (rowsAffected > 0) {
+            System.out.println("Record deleted successfully!");
+        } else {
+            System.out.println("No record found to delete.");
+        }
+
+    } catch (SQLException e) {
+        System.out.println("Error deleting record: " + e.getMessage());
+    }
+    }
+    public void updateData(String sql) {
+        try {
+            PreparedStatement pst = connect.prepareStatement(sql);
+            int rowsUpdated = pst.executeUpdate();
+            if (rowsUpdated > 0) {
+                JOptionPane.showMessageDialog(null, "Data Updated Successfully!");
+            } else {
+                System.out.println("Data Update Failed!");
+            }
+            pst.close();
+        } catch (SQLException ex) {
+            System.out.println("Connection Error: " + ex);
+        }
+
     }
 }
 

@@ -95,13 +95,10 @@ public class register extends javax.swing.JFrame {
 
         jPanel21 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         lastname = new javax.swing.JTextField();
-        cpass = new javax.swing.JPasswordField();
         phonenumber = new javax.swing.JTextField();
         pass = new javax.swing.JPasswordField();
-        jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
@@ -109,7 +106,6 @@ public class register extends javax.swing.JFrame {
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         jButton2 = new javax.swing.JButton();
-        cpw = new javax.swing.JLabel();
         fn = new javax.swing.JLabel();
         ln = new javax.swing.JLabel();
         pn1 = new javax.swing.JLabel();
@@ -122,6 +118,7 @@ public class register extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         acct = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(234, 207, 181));
@@ -135,11 +132,6 @@ public class register extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(234, 207, 181));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("REGISTRATION");
-        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 220, 20));
-
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/angelo-removebg-preview.png"))); // NOI18N
         jLabel2.setText("jLabel2");
         jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(-30, 240, 290, 190));
@@ -147,6 +139,7 @@ public class register extends javax.swing.JFrame {
         jPanel21.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 230, 450));
 
         lastname.setBackground(new java.awt.Color(222, 180, 138));
+        lastname.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         lastname.setBorder(new javax.swing.border.MatteBorder(null));
         lastname.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
@@ -160,16 +153,8 @@ public class register extends javax.swing.JFrame {
         });
         jPanel21.add(lastname, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 80, 160, 20));
 
-        cpass.setBackground(new java.awt.Color(222, 180, 138));
-        cpass.setBorder(new javax.swing.border.MatteBorder(null));
-        cpass.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                cpassFocusLost(evt);
-            }
-        });
-        jPanel21.add(cpass, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 230, 160, 20));
-
         phonenumber.setBackground(new java.awt.Color(222, 180, 138));
+        phonenumber.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         phonenumber.setBorder(new javax.swing.border.MatteBorder(null));
         phonenumber.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
@@ -184,6 +169,7 @@ public class register extends javax.swing.JFrame {
         jPanel21.add(phonenumber, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 130, 160, 20));
 
         pass.setBackground(new java.awt.Color(222, 180, 138));
+        pass.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         pass.setBorder(new javax.swing.border.MatteBorder(null));
         pass.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
@@ -195,12 +181,7 @@ public class register extends javax.swing.JFrame {
                 passActionPerformed(evt);
             }
         });
-        jPanel21.add(pass, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 230, 160, 20));
-
-        jLabel10.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
-        jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel10.setText("Confirm Password");
-        jPanel21.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 210, 170, 20));
+        jPanel21.add(pass, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 230, 340, 20));
 
         jLabel11.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -230,7 +211,7 @@ public class register extends javax.swing.JFrame {
         jLabel16.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel16.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel16.setText("Password");
-        jPanel21.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 210, 170, 20));
+        jPanel21.add(jLabel16, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 210, 340, 20));
 
         jButton2.setBackground(new java.awt.Color(155, 139, 105));
         jButton2.setText("Signup");
@@ -240,7 +221,6 @@ public class register extends javax.swing.JFrame {
             }
         });
         jPanel21.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 280, 210, 30));
-        jPanel21.add(cpw, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 250, 190, 10));
         jPanel21.add(fn, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 100, 160, 10));
         jPanel21.add(ln, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 100, 160, 10));
         jPanel21.add(pn1, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 150, 160, 10));
@@ -248,9 +228,10 @@ public class register extends javax.swing.JFrame {
         jPanel21.add(us, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 200, 160, 10));
 
         pw.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
-        jPanel21.add(pw, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 250, 210, 10));
+        jPanel21.add(pw, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 250, 340, 10));
 
         user.setBackground(new java.awt.Color(222, 180, 138));
+        user.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         user.setBorder(new javax.swing.border.MatteBorder(null));
         user.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
@@ -265,6 +246,7 @@ public class register extends javax.swing.JFrame {
         jPanel21.add(user, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 180, 160, 20));
 
         firstname2.setBackground(new java.awt.Color(222, 180, 138));
+        firstname2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         firstname2.setBorder(new javax.swing.border.MatteBorder(null));
         firstname2.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
@@ -279,6 +261,7 @@ public class register extends javax.swing.JFrame {
         jPanel21.add(firstname2, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 80, 160, 20));
 
         email1.setBackground(new java.awt.Color(222, 180, 138));
+        email1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         email1.setBorder(new javax.swing.border.MatteBorder(null));
         email1.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
@@ -296,7 +279,7 @@ public class register extends javax.swing.JFrame {
         jLabel5.setText("Account Type");
         jPanel21.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 160, 110, 20));
 
-        acct.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "admin", "applicant", "staff", "" }));
+        acct.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "(Choose account type)", "admin", "applicant", " ", " " }));
         acct.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 acctActionPerformed(evt);
@@ -311,6 +294,11 @@ public class register extends javax.swing.JFrame {
             }
         });
         jPanel21.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 360, -1, -1));
+
+        jLabel1.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("REGISTRATION");
+        jPanel21.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 20, 350, 20));
 
         getContentPane().add(jPanel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(-10, 0, 820, 450));
 
@@ -339,22 +327,6 @@ public class register extends javax.swing.JFrame {
     private void lastnameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_lastnameActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_lastnameActionPerformed
-
-    private void cpassFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_cpassFocusLost
-        String lname = cpass.getText();
-
-        if (lname.isEmpty()) {
-            cpass.setForeground(mycolor);
-            cpw.setText("This field is required");
-            cpw.setForeground(mycolor);
-        } else {
-            cpass.setForeground(Color.BLACK);
-            cpw.setText("");
-            cpw.setForeground(mycolor);
-        }
-
-        cpass.repaint();
-    }//GEN-LAST:event_cpassFocusLost
 
     private void phonenumberFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_phonenumberFocusLost
         String phoneRegex = "^[0-9]{11}$";
@@ -414,14 +386,15 @@ public class register extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Registration successful!", "Success", JOptionPane.INFORMATION_MESSAGE);
 
             login lg = new login();
-            
+            lg.setVisible(true);
             this.dispose();
 
         } else {
 
             JOptionPane.showMessageDialog(this, "Registration fail!", "fail", JOptionPane.INFORMATION_MESSAGE);
-
+          
         }
+        
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
@@ -604,20 +577,7 @@ public class register extends javax.swing.JFrame {
         }
 
         phonenumber.repaint();
-        String lname5 = cpass.getText();
-
-        if (lname5.isEmpty()) {
-            cpass.setForeground(mycolor);
-            cpw.setText("This field is required");
-            cpw.setForeground(mycolor);
-        } else {
-            cpass.setForeground(Color.BLACK);
-            cpw.setText("");
-            cpw.setForeground(mycolor);
-        }
-
-        cpass.repaint();
-        return valid;
+        return (valid);
     }
 
     /**
@@ -658,15 +618,12 @@ public class register extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> acct;
-    private javax.swing.JPasswordField cpass;
-    private javax.swing.JLabel cpw;
     private javax.swing.JTextField email1;
     private javax.swing.JLabel errorLabelEmail;
     private javax.swing.JTextField firstname2;
     private javax.swing.JLabel fn;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;

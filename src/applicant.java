@@ -36,8 +36,6 @@ Color mycolor = new Color(158,146,100);
         REPORTS = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        USER = new javax.swing.JPanel();
-        jLabel4 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
 
@@ -66,8 +64,8 @@ Color mycolor = new Color(158,146,100);
 
         jLabel1.setFont(new java.awt.Font("Lucida Console", 1, 14)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("DASHBOARD");
-        DASHBOARD.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 11, 120, 19));
+        jLabel1.setText("APPLICANT");
+        DASHBOARD.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 120, 19));
 
         jPanel3.add(DASHBOARD, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 140, 40));
 
@@ -85,46 +83,22 @@ Color mycolor = new Color(158,146,100);
 
         jLabel2.setFont(new java.awt.Font("Lucida Console", 1, 14)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("REPORTS");
-        REPORTS.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 11, 120, 19));
+        jLabel2.setText("PROFILE");
+        REPORTS.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 120, 19));
 
-        jLabel3.setFont(new java.awt.Font("Lucida Console", 1, 14)); // NOI18N
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("REPORTS");
-        REPORTS.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 11, 120, 19));
+        jPanel3.add(REPORTS, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 150, 140, 40));
 
-        jPanel3.add(REPORTS, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 210, 140, 40));
-
-        USER.setBackground(new java.awt.Color(158, 146, 100));
-        USER.setToolTipText("");
-        USER.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                USERMouseClicked(evt);
-            }
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                USERMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                USERMouseExited(evt);
-            }
-        });
-        USER.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel4.setFont(new java.awt.Font("Lucida Console", 1, 14)); // NOI18N
-        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setText("USER");
-        USER.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 120, 19));
-
-        jPanel3.add(USER, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 150, 140, 40));
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icons8-applicant-80.png"))); // NOI18N
+        jPanel3.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, -1, -1));
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 140, 350));
 
         jPanel2.setBackground(new java.awt.Color(234, 207, 181));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel5.setFont(new java.awt.Font("Arial", 1, 18)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel5.setText("WELLCOME TO HR MANAGEMENT SYSTEM");
+        jLabel5.setText("WELLCOME TO AGEINCY MANAGEMENT SYSTEM");
         jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 440, 30));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 0, 440, 50));
@@ -135,17 +109,15 @@ Color mycolor = new Color(158,146,100);
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 580, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 580, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 350, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
@@ -169,23 +141,9 @@ Color mycolor = new Color(158,146,100);
         REPORTS.setBackground(mycolor);
     }//GEN-LAST:event_REPORTSMouseExited
 
-    private void USERMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_USERMouseEntered
-        USER.setBackground(bodycolor);
-    }//GEN-LAST:event_USERMouseEntered
-
-    private void USERMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_USERMouseExited
-        USER.setBackground(mycolor);
-    }//GEN-LAST:event_USERMouseExited
-
     private void DASHBOARDMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DASHBOARDMouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_DASHBOARDMouseClicked
-
-    private void USERMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_USERMouseClicked
-        user1 ur =new user1();
-        ur.setVisible(true);
-        this.dispose(); 
-    }//GEN-LAST:event_USERMouseClicked
 
     /**
      * @param args the command line arguments
@@ -227,11 +185,9 @@ Color mycolor = new Color(158,146,100);
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel DASHBOARD;
     private javax.swing.JPanel REPORTS;
-    private javax.swing.JPanel USER;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;

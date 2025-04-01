@@ -4,10 +4,12 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/mendo/OneDrive/Desktop/gui/src/admindashboard.java</file>
-            <file>file:/C:/Users/mendo/OneDrive/Desktop/gui/src/user1.java</file>
             <file>file:/C:/Users/mendo/OneDrive/Desktop/gui/src/applicant.java</file>
-            <file>file:/C:/Users/mendo/OneDrive/Desktop/gui/src/register.java</file>
+            <file>file:/C:/Users/mendo/OneDrive/Desktop/gui/src/add.java</file>
+            <file>file:/C:/Users/mendo/OneDrive/Desktop/gui/src/config/dbConnector.java</file>
+            <file>file:/C:/Users/mendo/OneDrive/Desktop/gui/src/edit.java</file>
             <file>file:/C:/Users/mendo/OneDrive/Desktop/gui/src/login.java</file>
+            <file>file:/C:/Users/mendo/OneDrive/Desktop/gui/src/register.java</file>
         </group>
     </open-files>
 </project-private>
