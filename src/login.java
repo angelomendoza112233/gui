@@ -1,8 +1,10 @@
 
 import config.dbConnector;
+import config.passwordHasher;
 import config.session;
 import gfx.RoundedTextField;
 import java.awt.Color;
+import java.security.NoSuchAlgorithmException;
 import javax.swing.JOptionPane;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -14,34 +16,60 @@ public class login extends javax.swing.JFrame {
 
     public login() {
         initComponents();
-
+jLabel3 = new javax.swing.JLabel();
+java.net.URL imgUrl = getClass().getResource("/image/angelo-removebg-preview.png");
+if (imgUrl != null) {
+    jLabel3.setIcon(new javax.swing.ImageIcon(imgUrl));
+} else {
+    System.err.println("Image resource not found! Please check the path and file.");
+}
+jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 260, 510, 300));
     }
-    public static class LoginHandler {
-        public static String[] loginAcc(String username, String password) {
-            
-            String query = "SELECT u_roles, u_status FROM user WHERE u_username = ? AND u_password = ?";
-            
-            try (Connection conn = dbConnector.getConnection();
-                 PreparedStatement pstmt = conn.prepareStatement(query)) {
+   public static boolean loginAcc(String username, String password) {
+    dbConnector connector = new dbConnector();
 
-                pstmt.setString(1, username);
-                pstmt.setString(2, password);
+    try {
+        // Use PreparedStatement to prevent SQL injection
+        String query = "SELECT * FROM user WHERE u_username = ?";
+        Connection conn = connector.getConnection(); 
+        PreparedStatement ps = conn.prepareStatement(query);
+        ps.setString(1, username);
+        ResultSet resultSet = ps.executeQuery();
 
-                try (ResultSet rs = pstmt.executeQuery()) {
-                    if (rs.next()) {
-                        return new String[]{rs.getString("u_roles"), rs.getString("u_status")};
-                    }
-                }
+        if (resultSet.next()) {
+            String storedHash = resultSet.getString("u_password");
 
-            } catch (SQLException ex) {
-                System.err.println("Login Error: " + ex.getMessage());
+            // Use a proper password verifier instead of rehashing
+            if (passwordHasher.verifyPassword(password, storedHash)) {
+                // Set session data
+                session sess = session.getInstance();
+                sess.setU_id(resultSet.getInt("u_id"));
+                sess.setFirstName(resultSet.getString("u_fname"));
+                sess.setLastName(resultSet.getString("u_lname"));
+                sess.setContact(resultSet.getString("u_number"));
+                sess.setEmail(resultSet.getString("u_email"));
+                sess.setUsername(resultSet.getString("u_username"));
+                sess.setPassword(storedHash); // store hash, not plain
+                sess.setRoles(resultSet.getString("u_roles"));
+                sess.setAcc_status(resultSet.getString("u_status"));
+
+                return true;
+            } else {
+                System.out.println("Password does not match");
+                return false;
             }
-
-            return null; // Return null if login fails
+        } else {
+            System.out.println("Username not found");
+            return false;
         }
-    
 
+    } catch (SQLException | NoSuchAlgorithmException ex) {
+        ex.printStackTrace(); // or use a logger
+        return false;
     }
+}
+
+    
     Color mycolo = new Color(202, 70, 70);
 
     Color mycolor = new Color(158, 146, 100);
@@ -255,74 +283,33 @@ public class login extends javax.swing.JFrame {
 
     if (u_username.isEmpty() || u_password.isEmpty()) {
         JOptionPane.showMessageDialog(this, "Username and/or password cannot be empty.", "Login Error", JOptionPane.ERROR_MESSAGE);
-        username.requestFocus();
         return;
     }
 
-    // Validate login credentials
-    String[] loginData = LoginHandler.loginAcc(u_username, u_password);
-    if (loginData == null) {
+    if (!loginAcc(u_username, u_password)) {
         JOptionPane.showMessageDialog(this, "Invalid username or password.", "Login Failed", JOptionPane.ERROR_MESSAGE);
         return;
     }
-    
-    String acct = loginData[0]; // User type (e.g., "admin", "applicant")
-    String accStatus = loginData[1]; // Status (e.g., "active", "pending")
+
+    // After loginAcc() sets the session
+    session sess = session.getInstance();
+    String acct = sess.getRoles();
+    String accStatus = sess.getAcc_status();
 
     if (!"active".equalsIgnoreCase(accStatus)) {
         JOptionPane.showMessageDialog(this, "Your account is still pending. Please contact the administrator.", "Login Error", JOptionPane.ERROR_MESSAGE);
         return;
     }
 
-    // Fetch user details from database
-    try {
-        Connection conn = dbConnector.getConnection(); // Ensure you have a method to get a connection
-            String query = "SELECT * FROM user WHERE u_username = ? AND u_password = ?";
-        PreparedStatement pst = conn.prepareStatement(query);
-        pst.setString(1, u_username);
-        pst.setString(2, u_password);
-
-        ResultSet rs = pst.executeQuery();
-
-        if (rs.next()) { // Check if a result was found
-            session sess = session.getInstance();
-
-            sess.setU_id(rs.getInt("u_id"));
-            sess.setFirstName(rs.getString("u_fname"));
-            sess.setLastName(rs.getString("u_lname"));
-            sess.setContact(rs.getString("u_number"));
-            sess.setEmail(rs.getString("u_email"));
-            sess.setUsername(rs.getString("u_username"));
-            sess.setPassword(rs.getString("u_password")); // Store password securely!
-            sess.setRoles(rs.getString("u_roles"));
-            sess.setAcc_status(rs.getString("u_status"));
-            
-
-            // Redirect based on account type
-            if ("admin".equalsIgnoreCase(acct)) {
-                new admindashboard().setVisible(true);
-            } else if ("applicant".equalsIgnoreCase(acct)) {
-                new applicant().setVisible(true);
-            } else {
-                JOptionPane.showMessageDialog(this, "Unknown user type!", "Login Error", JOptionPane.ERROR_MESSAGE);
-                return;
-            }
-
-            this.dispose(); // Close login window
-        } else {
-            JOptionPane.showMessageDialog(this, "Incorrect username or password.", "Login Error", JOptionPane.ERROR_MESSAGE);
-            password.requestFocus();
-        }
-
-        // Close resources
-        rs.close();
-        pst.close();
-        conn.close();
-        
-    } catch (SQLException ex) {
-        ex.printStackTrace();
-        JOptionPane.showMessageDialog(this, "Database error occurred!", "Error", JOptionPane.ERROR_MESSAGE);
+    if ("admin".equalsIgnoreCase(acct)) {
+        new admindashboard().setVisible(true);
+    } else if ("applicant".equalsIgnoreCase(acct)) {
+        new applicant().setVisible(true);
+    } else {
+        JOptionPane.showMessageDialog(this, "Unknown user type!", "Login Error", JOptionPane.ERROR_MESSAGE);
     }
+
+    this.dispose(); // Close login frame
 
     }//GEN-LAST:event_jPanel3MouseClicked
 

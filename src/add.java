@@ -1,9 +1,17 @@
 
 import config.dbConnector;
 import java.awt.Color;
+import java.awt.Image;
+import java.io.File;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 /*
@@ -25,7 +33,41 @@ public class add extends javax.swing.JFrame {
     public add() {
         initComponents();
     }
+String destanation="";
+File Selectedfile;
+String oldpath;
+String path;
 
+public int FileExistenceChecker(String path) {
+    File file = new File(path);
+    String fileName = file.getName();
+    Path filePath = Paths.get("src/images", fileName);
+    
+    boolean fileExists = Files.exists(filePath);
+    return fileExists ? 1 : 0;
+}
+public ImageIcon ResizeImage(String imagePath, byte[] pic, JLabel label) {
+    ImageIcon myImage = null;
+    
+    if (imagePath != null) {
+        myImage = new ImageIcon(imagePath);
+    } else if (pic != null) {
+        myImage = new ImageIcon(pic);
+    } else {
+        return null; // No image to process
+    }
+
+    int newHeight = getHeightFromWidth(myImage.getIconWidth(), myImage.getIconHeight(), label.getWidth());
+    Image img = myImage.getImage();
+    Image newImg = img.getScaledInstance(label.getWidth(), newHeight, Image.SCALE_SMOOTH);
+    ImageIcon resizedImage = new ImageIcon(newImg);
+    
+    return resizedImage;
+}
+public int getHeightFromWidth(int originalWidth, int originalHeight, int targetWidth) {
+    if (originalWidth == 0) return originalHeight;
+    return (originalHeight * targetWidth) / originalWidth;
+}
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -60,6 +102,12 @@ public class add extends javax.swing.JFrame {
         user = new javax.swing.JTextField();
         us = new javax.swing.JLabel();
         passwordtext2 = new javax.swing.JLabel();
+        st = new javax.swing.JComboBox<>();
+        jLabel2 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        image = new javax.swing.JLabel();
+        remove = new javax.swing.JButton();
+        select = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -77,14 +125,14 @@ public class add extends javax.swing.JFrame {
         jPanel2.add(lastnametext, new org.netbeans.lib.awtextra.AbsoluteConstraints(359, 50, -1, -1));
 
         emailtext.setText("Email");
-        jPanel2.add(emailtext, new org.netbeans.lib.awtextra.AbsoluteConstraints(109, 124, 54, -1));
+        jPanel2.add(emailtext, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 110, 54, -1));
 
         cnumbertext.setText("Contact Number");
-        jPanel2.add(cnumbertext, new org.netbeans.lib.awtextra.AbsoluteConstraints(351, 124, -1, -1));
+        jPanel2.add(cnumbertext, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 110, -1, -1));
 
         passwordtext.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         passwordtext.setText("Username");
-        jPanel2.add(passwordtext, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 220, 190, -1));
+        jPanel2.add(passwordtext, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 230, 190, -1));
 
         errorType.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
         jPanel2.add(errorType, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 270, 190, 10));
@@ -98,7 +146,7 @@ public class add extends javax.swing.JFrame {
         jPanel2.add(backlogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 280, -1, -1));
 
         passwordtext1.setText("Role");
-        jPanel2.add(passwordtext1, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 200, -1, -1));
+        jPanel2.add(passwordtext1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 190, -1, -1));
 
         firstname2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         firstname2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -140,7 +188,7 @@ public class add extends javax.swing.JFrame {
                 email1ActionPerformed(evt);
             }
         });
-        jPanel2.add(email1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 150, 190, 30));
+        jPanel2.add(email1, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 140, 190, 30));
 
         phonenumber.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         phonenumber.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -154,7 +202,7 @@ public class add extends javax.swing.JFrame {
                 phonenumberActionPerformed(evt);
             }
         });
-        jPanel2.add(phonenumber, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 150, 190, 30));
+        jPanel2.add(phonenumber, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 140, 190, 30));
 
         acct.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "(Choose account type)", "admin", "applicant", " ", " " }));
         acct.addActionListener(new java.awt.event.ActionListener() {
@@ -162,7 +210,7 @@ public class add extends javax.swing.JFrame {
                 acctActionPerformed(evt);
             }
         });
-        jPanel2.add(acct, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 200, 140, 20));
+        jPanel2.add(acct, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 190, 140, 20));
 
         pass.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         pass.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -176,7 +224,7 @@ public class add extends javax.swing.JFrame {
                 passActionPerformed(evt);
             }
         });
-        jPanel2.add(pass, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 240, 190, 30));
+        jPanel2.add(pass, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 250, 190, 30));
 
         jButton2.setBackground(new java.awt.Color(155, 139, 105));
         jButton2.setText("Signup");
@@ -192,7 +240,7 @@ public class add extends javax.swing.JFrame {
 
         pw.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         jPanel2.add(pw, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 270, 200, 10));
-        jPanel2.add(errorLabelEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 190, 190, 10));
+        jPanel2.add(errorLabelEmail, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 180, 190, 10));
 
         user.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         user.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -206,20 +254,54 @@ public class add extends javax.swing.JFrame {
                 userActionPerformed(evt);
             }
         });
-        jPanel2.add(user, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 240, 190, 30));
+        jPanel2.add(user, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 250, 190, 30));
         jPanel2.add(us, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 270, 160, 20));
 
         passwordtext2.setText("Password");
-        jPanel2.add(passwordtext2, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 220, -1, -1));
+        jPanel2.add(passwordtext2, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 230, -1, -1));
+
+        st.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "active", "pending" }));
+        st.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                stActionPerformed(evt);
+            }
+        });
+        jPanel2.add(st, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 190, 140, -1));
+
+        jLabel2.setText("status");
+        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 184, -1, 30));
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(image, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(image, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+        );
+
+        jPanel2.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 60, 220, 200));
+
+        remove.setText("REMOVE");
+        jPanel2.add(remove, new org.netbeans.lib.awtextra.AbsoluteConstraints(650, 280, 100, 30));
+
+        select.setText("SELECT");
+        select.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                selectActionPerformed(evt);
+            }
+        });
+        jPanel2.add(select, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 280, 100, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 520, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 767, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -398,9 +480,10 @@ private boolean emailExists(String email) {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
           dbConnector connector = new dbConnector();
     if (signUpValidation()) {
-        connector.insertData("INSERT INTO user (u_fname, u_lname, u_email, u_number, u_username, u_roles, u_password, u_status) "
-            + "VALUES ('" + firstname2.getText() + "','" + lastname1.getText() + "','" + email1.getText() + "',"
-            + "'" + phonenumber.getText() + "','" + user.getText() + "','" + acct.getSelectedItem() + "','" + pass.getText() + "','Pending')");
+        connector.insertData("INSERT INTO user (u_fname, u_lname, u_email, u_number, u_username, u_roles, u_password, u_status) " +
+    "VALUES ('" + firstname2.getText() + "','" + lastname1.getText() + "','" + email1.getText() + "','" +
+    phonenumber.getText() + "','" + user.getText() + "','" + acct.getSelectedItem() + "','" + 
+    pass.getText() + "','" + st.getSelectedItem() + "')");
 
         JOptionPane.showMessageDialog(this, "Registration successful!", "Success", JOptionPane.INFORMATION_MESSAGE);
 
@@ -510,6 +593,36 @@ private boolean emailExists(String email) {
     private void userActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_userActionPerformed
+
+    private void stActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_stActionPerformed
+
+    private void selectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_selectActionPerformed
+       JFileChooser fileChooser = new JFileChooser();
+int returnValue = fileChooser.showOpenDialog(null);
+
+if (returnValue == JFileChooser.APPROVE_OPTION) {
+    try {
+        File selectedFile = fileChooser.getSelectedFile();
+        String path = selectedFile.getAbsolutePath();
+        String destination = "src/userimages/" + selectedFile.getName();
+
+        if (FileExistenceChecker(path) == 1) {
+            JOptionPane.showMessageDialog(null, "File Already Exists. Rename or Choose another!");
+            destination = "";
+            path = "";
+        } else {
+            image.setIcon(ResizeImage(path, null, image));
+            select.setEnabled(false);
+           remove.setEnabled(true);
+            
+        }
+    } catch (Exception ex) {
+        System.out.println("File Error: " + ex.getMessage());
+    }
+}
+    }//GEN-LAST:event_selectActionPerformed
 public boolean duplicateChecker() {
     dbConnector dbc = new dbConnector();
 String email;
@@ -576,8 +689,11 @@ String email;
     private javax.swing.JLabel errorType;
     private javax.swing.JTextField firstname2;
     private javax.swing.JLabel fn;
+    private javax.swing.JLabel image;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JTextField lastname1;
     private javax.swing.JLabel lastnametext;
@@ -590,6 +706,9 @@ String email;
     private javax.swing.JTextField phonenumber;
     private javax.swing.JLabel pn1;
     private javax.swing.JLabel pw;
+    public javax.swing.JButton remove;
+    public javax.swing.JButton select;
+    private javax.swing.JComboBox<String> st;
     private javax.swing.JLabel us;
     private javax.swing.JTextField user;
     // End of variables declaration//GEN-END:variables

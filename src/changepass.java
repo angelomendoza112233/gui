@@ -23,7 +23,7 @@ import javax.swing.JOptionPane;
  */
 public class changepass extends javax.swing.JFrame {
     
-
+ session sess = session.getInstance();
     
     /**
      * Creates new form 
@@ -37,7 +37,6 @@ public class changepass extends javax.swing.JFrame {
     try {
         MessageDigest md = MessageDigest.getInstance("SHA-256");
         byte[] hashedBytes = md.digest(password.getBytes());
-
         StringBuilder hexString = new StringBuilder();
         for (byte b : hashedBytes) {
             hexString.append(String.format("%02x", b));
@@ -47,7 +46,8 @@ public class changepass extends javax.swing.JFrame {
         e.printStackTrace();
         return null;
     }
-  }
+    
+}
     
     private boolean updatePassword(String newPassword) {
     String userId = session.getInstance().getU_id() + "";
@@ -57,11 +57,11 @@ public class changepass extends javax.swing.JFrame {
 
     String sql = "UPDATE user SET u_password = ? WHERE u_id = ?";
 
-    try (Connection connect = new dbConnector ().getConnection();
+    try (Connection connect = new dbConnector().getConnection();
          PreparedStatement pst = connect.prepareStatement(sql)) {
 
-        pst.setString(1, hashedNewPassword); 
-        pst.setString(2, userId);
+        pst.setString(1, hashedNewPassword); // 1st placeholder
+        pst.setString(2, userId);            // 2nd placeholder
 
         return pst.executeUpdate() > 0; 
     } catch (SQLException ex) {
@@ -70,7 +70,7 @@ public class changepass extends javax.swing.JFrame {
     return false;
 }
     
-    private boolean verifyCurrentPassword(String enteredPassword) {
+  private boolean verifyCurrentPassword(String enteredPassword) {
     String userId = session.getInstance().getU_id() + "";
     String sql = "SELECT u_password FROM user WHERE u_id = ?";
 
@@ -82,15 +82,18 @@ public class changepass extends javax.swing.JFrame {
 
         if (rs.next()) {
             String storedHashedPassword = rs.getString("u_password");
-            String enteredHashedPassword = hashPassword(enteredPassword); 
+            String enteredHashedPassword = hashPassword(enteredPassword);
 
-            return storedHashedPassword.equals(enteredHashedPassword); 
+            System.out.println("Entered hashed password: " + enteredHashedPassword);
+            System.out.println("Stored hashed password: " + storedHashedPassword);
+
+            return storedHashedPassword.equals(enteredHashedPassword);
         }
     } catch (SQLException ex) {
         ex.printStackTrace();
     }
     return false;
-    }
+}
  // ✅ Correctly placed closing brace
     
     /** 
@@ -104,7 +107,6 @@ public class changepass extends javax.swing.JFrame {
 
         jPanel2 = new javax.swing.JPanel();
         logintext = new javax.swing.JLabel();
-        idfieldtext1 = new javax.swing.JLabel();
         change = new javax.swing.JButton();
         backlogin = new javax.swing.JLabel();
         passwordtext = new javax.swing.JLabel();
@@ -114,18 +116,16 @@ public class changepass extends javax.swing.JFrame {
         passwordtext1 = new javax.swing.JLabel();
         pass = new javax.swing.JPasswordField();
         passwordtext2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel2.setBackground(new java.awt.Color(171, 167, 144));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         logintext.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
         logintext.setText("Change Password");
         jPanel2.add(logintext, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 11, -1, -1));
-
-        idfieldtext1.setText("ID:");
-        jPanel2.add(idfieldtext1, new org.netbeans.lib.awtextra.AbsoluteConstraints(22, 54, -1, -1));
 
         change.setBackground(new java.awt.Color(241, 185, 185));
         change.setText("change");
@@ -159,23 +159,28 @@ public class changepass extends javax.swing.JFrame {
             }
         });
         jPanel2.add(cpass, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 190, 30));
-        jPanel2.add(rpass, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 200, 190, 30));
+        jPanel2.add(rpass, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 200, 440, 30));
 
         passwordtext1.setText("re- enter Password");
-        jPanel2.add(passwordtext1, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 180, -1, -1));
+        jPanel2.add(passwordtext1, new org.netbeans.lib.awtextra.AbsoluteConstraints(200, 180, -1, -1));
         jPanel2.add(pass, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 140, 190, 30));
 
         passwordtext2.setText("New Password");
         jPanel2.add(passwordtext2, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 110, -1, -1));
 
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icons8-back-50 (1).png"))); // NOI18N
+        jLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel3MouseClicked(evt);
+            }
+        });
+        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 10, 50, 50));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 490, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -192,7 +197,7 @@ public class changepass extends javax.swing.JFrame {
     }//GEN-LAST:event_changeFocusLost
 
     private void changeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_changeActionPerformed
- String currentPass = String.valueOf(cpass.getPassword());
+    String currentPass = String.valueOf(cpass.getPassword());
     String newPass = String.valueOf(pass.getPassword());
     String reenterPass = String.valueOf(rpass.getPassword());
 
@@ -200,11 +205,13 @@ public class changepass extends javax.swing.JFrame {
     JOptionPane.showMessageDialog(this, "All fields are required!", "Error", JOptionPane.ERROR_MESSAGE);
     return;
 }
+    System.out.println("New password: '" + newPass + "'");
+System.out.println("Re-entered password: '" + reenterPass + "'");
 
-    if (!currentPass.equals(reenterPass)) {
-        JOptionPane.showMessageDialog(this, "New passwords do not match!", "Error", JOptionPane.ERROR_MESSAGE);
-        return;
-    }
+   if (!newPass.trim().equals(reenterPass.trim())) {
+    JOptionPane.showMessageDialog(this, "New passwords do not match!", "Error", JOptionPane.ERROR_MESSAGE);
+    return;
+}
 
     if (verifyCurrentPassword(currentPass)) {
         if (updatePassword(newPass)) {
@@ -228,6 +235,13 @@ public class changepass extends javax.swing.JFrame {
     private void cpassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cpassActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cpassActionPerformed
+
+    private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
+        aprovmanagement log = new aprovmanagement();
+        log.setVisible(true);
+        this.dispose();
+        login low = new login();
+    }//GEN-LAST:event_jLabel3MouseClicked
 
     /**
      * @param args the command line arguments
@@ -269,7 +283,7 @@ public class changepass extends javax.swing.JFrame {
     private javax.swing.JButton change;
     private javax.swing.JPasswordField cpass;
     private javax.swing.JLabel idfieldtext;
-    private javax.swing.JLabel idfieldtext1;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel logintext;
     private javax.swing.JPasswordField pass;

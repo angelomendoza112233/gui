@@ -2,6 +2,8 @@
 import config.dbConnector;
 import java.awt.Color;
 import java.awt.Font;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -375,25 +377,38 @@ public class register extends javax.swing.JFrame {
         }
         pass.repaint();
     }//GEN-LAST:event_passFocusLost
+private String hashPassword(String password) {
+    try {
+        MessageDigest md = MessageDigest.getInstance("SHA-256");
+        byte[] hashedBytes = md.digest(password.getBytes());
 
+        StringBuilder sb = new StringBuilder();
+        for (byte b : hashedBytes) {
+            sb.append(String.format("%02x", b));
+        }
+
+        return sb.toString();
+    } catch (NoSuchAlgorithmException e) {
+        throw new RuntimeException(e);
+    }
+}
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         dbConnector connector = new dbConnector();
-        if (signUpValidation()) {
-            connector.insertData("INSERT INTO user (u_fname, u_lname, u_email, u_number, u_roles, u_username, u_password, u_status) "
-                    + "VALUES ('" + firstname2.getText() + "','" + lastname.getText() + "','" + email1.getText() + "',"
-                    + "'" + phonenumber.getText() + "','" + acct.getSelectedItem() + "','" + user.getText() + "','" + pass.getText() + "','Pending')");
+    if (signUpValidation()) {
+        String hashedPassword = hashPassword(pass.getText());
 
-            JOptionPane.showMessageDialog(this, "Registration successful!", "Success", JOptionPane.INFORMATION_MESSAGE);
+        connector.insertData("INSERT INTO user (u_fname, u_lname, u_email, u_number, u_roles, u_username, u_password, u_status) "
+                + "VALUES ('" + firstname2.getText() + "','" + lastname.getText() + "','" + email1.getText() + "',"
+                + "'" + phonenumber.getText() + "','" + acct.getSelectedItem() + "','" + user.getText() + "','" + hashedPassword + "','Pending')");
 
-            login lg = new login();
-            lg.setVisible(true);
-            this.dispose();
+        JOptionPane.showMessageDialog(this, "Registration successful!", "Success", JOptionPane.INFORMATION_MESSAGE);
 
-        } else {
-
-            JOptionPane.showMessageDialog(this, "Registration fail!", "fail", JOptionPane.INFORMATION_MESSAGE);
-          
-        }
+        login lg = new login();
+        lg.setVisible(true);
+        this.dispose();
+    } else {
+        JOptionPane.showMessageDialog(this, "Registration fail!", "fail", JOptionPane.INFORMATION_MESSAGE);
+    }
         
     }//GEN-LAST:event_jButton2ActionPerformed
 

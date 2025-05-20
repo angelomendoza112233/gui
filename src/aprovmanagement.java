@@ -1,5 +1,7 @@
 
 import config.dbConnector;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
@@ -25,7 +27,24 @@ public class aprovmanagement extends javax.swing.JFrame {
         displayData();
     }
    
-    
+     public void getPendingAccCount() {
+    dbConnector con = new dbConnector();
+    String sql = "SELECT COUNT(*) AS count FROM user WHERE u_status = 'Pending'";
+
+    try (Connection conn = con.getConnection(); 
+         PreparedStatement pst = conn.prepareStatement(sql);
+         ResultSet rs = pst.executeQuery()) {
+
+        if (rs.next()) {
+            int count = rs.getInt("count");
+            PA.setText(String.valueOf(count));
+        }
+
+    } catch (SQLException ex) {
+        ex.printStackTrace(); // shows full error in console
+    }
+
+    }
     public void displayData() {
         try {
             dbConnector dbc = new dbConnector(); // Ensure this class is correctly implemented
@@ -57,6 +76,8 @@ public class aprovmanagement extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        penAcc = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         usertbl = new javax.swing.JTable();
         edit = new javax.swing.JButton();
@@ -64,6 +85,7 @@ public class aprovmanagement extends javax.swing.JFrame {
         refresh = new javax.swing.JButton();
         addaccount = new javax.swing.JButton();
         activate = new javax.swing.JButton();
+        PA = new javax.swing.JLabel();
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
@@ -104,6 +126,17 @@ public class aprovmanagement extends javax.swing.JFrame {
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("USER");
         jPanel3.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 160, 140, 20));
+
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icons8-back-50 (1).png"))); // NOI18N
+        jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel4MouseClicked(evt);
+            }
+        });
+        jPanel3.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 320, -1, -1));
+
+        penAcc.setText("Pending Accounts");
+        jPanel3.add(penAcc, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 140, 450));
 
@@ -150,6 +183,7 @@ public class aprovmanagement extends javax.swing.JFrame {
             }
         });
         jPanel1.add(activate, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 120, 90, 30));
+        jPanel1.add(PA, new org.netbeans.lib.awtextra.AbsoluteConstraints(710, 50, 20, 20));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -202,7 +236,7 @@ public class aprovmanagement extends javax.swing.JFrame {
 
             // Run SQL DELETE command here
             dbConnector  con = new dbConnector();
-            String query = "DELETE FROM tbl_user WHERE u_id = '" + id + "'";
+            String query = "DELETE FROM user WHERE u_id = '" + id + "'";
             con.deleteData(query);
 
             // Refresh table
@@ -218,7 +252,10 @@ public class aprovmanagement extends javax.swing.JFrame {
 
     private void addaccountActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addaccountActionPerformed
         add acc = new add();
+        acc.remove.setEnabled(false);
+        acc.select.setEnabled(true);
         acc.setVisible(true);
+        
     }//GEN-LAST:event_addaccountActionPerformed
 
     private void activateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_activateActionPerformed
@@ -239,6 +276,13 @@ public class aprovmanagement extends javax.swing.JFrame {
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
         
     }//GEN-LAST:event_jLabel2MouseClicked
+
+    private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
+       admindashboard log = new admindashboard();
+        log.setVisible(true);
+        this.dispose();
+        login low = new login();
+    }//GEN-LAST:event_jLabel4MouseClicked
 
     /**
      * @param args the command line arguments
@@ -277,6 +321,7 @@ public class aprovmanagement extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel PA;
     private javax.swing.JButton activate;
     private javax.swing.JButton addaccount;
     private javax.swing.JButton delete;
@@ -285,11 +330,13 @@ public class aprovmanagement extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel penAcc;
     private javax.swing.JButton refresh;
     private javax.swing.JTable usertbl;
     // End of variables declaration//GEN-END:variables
