@@ -168,13 +168,15 @@ public class changepass extends javax.swing.JFrame {
         passwordtext2.setText("New Password");
         jPanel2.add(passwordtext2, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 110, -1, -1));
 
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icons8-back-50 (1).png"))); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel3.setText("LOGOUT");
         jLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jLabel3MouseClicked(evt);
             }
         });
-        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 10, 50, 50));
+        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 320, 130, 20));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -237,10 +239,20 @@ System.out.println("Re-entered password: '" + reenterPass + "'");
     }//GEN-LAST:event_cpassActionPerformed
 
     private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
-        aprovmanagement log = new aprovmanagement();
-        log.setVisible(true);
-        this.dispose();
-        login low = new login();
+        int confirm = JOptionPane.showConfirmDialog(this, "Are you sure you want to log out?", "Logout", JOptionPane.YES_NO_OPTION);
+        if (confirm == JOptionPane.YES_OPTION) {
+            session userSession = session.getInstance();
+
+            userSession.setFirstName(null);
+            userSession.setLastName(null);
+            userSession.setEmail(null);
+            userSession.setUsername(null);
+            userSession.setAcc_type(null);
+            userSession.setAcc_status(null);
+            login lg = new login();
+            lg.setVisible(true);
+            this.dispose();
+        }
     }//GEN-LAST:event_jLabel3MouseClicked
 
     /**

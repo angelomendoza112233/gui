@@ -1,5 +1,11 @@
 
+import config.dbConnector;
+import config.session;
 import java.awt.Color;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+import net.proteanit.sql.DbUtils;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -16,6 +22,7 @@ public class applicant extends javax.swing.JFrame {
     /** Creates new form user */
     public applicant() {
         initComponents();
+        displayData();
     }
 Color mycolor = new Color(158,146,100);
      Color headcolor = new Color(234,207,181);
@@ -30,19 +37,31 @@ Color mycolor = new Color(158,146,100);
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
+        activate = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         DASHBOARD = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         REPORTS = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jobstbl = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(211, 180, 158));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        activate.setText("Apply");
+        activate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                activateActionPerformed(evt);
+            }
+        });
+        jPanel1.add(activate, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 60, 90, 30));
 
         jPanel3.setBackground(new java.awt.Color(158, 146, 100));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -94,6 +113,16 @@ Color mycolor = new Color(158,146,100);
 
         jPanel3.add(REPORTS, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 150, 140, 40));
 
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel4.setText("LOGOUT");
+        jLabel4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel4MouseClicked(evt);
+            }
+        });
+        jPanel3.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 290, 100, 30));
+
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 140, 350));
 
         jPanel2.setBackground(new java.awt.Color(234, 207, 181));
@@ -105,6 +134,10 @@ Color mycolor = new Color(158,146,100);
         jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 10, 440, 30));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 0, 440, 50));
+
+        jScrollPane1.setViewportView(jobstbl);
+
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 100, 440, 250));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -128,6 +161,21 @@ Color mycolor = new Color(158,146,100);
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public void displayData() {
+        try {
+            dbConnector dbc = new dbConnector(); // Ensure this class is correctly implemented
+            ResultSet rs = dbc.getData("SELECT * FROM jobs");
+
+            if (rs != null) {
+                jobstbl.setModel(DbUtils.resultSetToTableModel(rs)); // Use usertbl, not user1
+                rs.close();
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error: " + ex.getMessage());
+        }
+    }
+    
+    
     private void DASHBOARDMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DASHBOARDMouseEntered
         DASHBOARD.setBackground(bodycolor);
     }//GEN-LAST:event_DASHBOARDMouseEntered
@@ -153,6 +201,40 @@ Color mycolor = new Color(158,146,100);
     private void REPORTSMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_REPORTSMouseExited
         REPORTS.setBackground(mycolor);
     }//GEN-LAST:event_REPORTSMouseExited
+
+    private void activateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_activateActionPerformed
+        int selectedRow = jobstbl.getSelectedRow();
+
+        if (selectedRow == -1) {
+            JOptionPane.showMessageDialog(this, "Please select a row to edit.");
+            return;
+        }
+
+        String id = jobstbl.getValueAt(selectedRow, 0).toString();
+
+        dbConnector dbc = new dbConnector();
+
+        session sess = session.getInstance();
+        
+        dbc.updateData("INSERT INTO application (job_id, user_id, application_status) VALUES ('"+id+"', '"+session.getU_id()+"', 'Pending')");
+    }//GEN-LAST:event_activateActionPerformed
+
+    private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
+        int confirm = JOptionPane.showConfirmDialog(this, "Are you sure you want to log out?", "Logout", JOptionPane.YES_NO_OPTION);
+        if (confirm == JOptionPane.YES_OPTION) {
+            session userSession = session.getInstance();
+
+            userSession.setFirstName(null);
+            userSession.setLastName(null);
+            userSession.setEmail(null);
+            userSession.setUsername(null);
+            userSession.setAcc_type(null);
+            userSession.setAcc_status(null);
+            login lg = new login();
+            lg.setVisible(true);
+            this.dispose();
+        }
+    }//GEN-LAST:event_jLabel4MouseClicked
 
     /**
      * @param args the command line arguments
@@ -194,13 +276,17 @@ Color mycolor = new Color(158,146,100);
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel DASHBOARD;
     private javax.swing.JPanel REPORTS;
+    private javax.swing.JButton activate;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jobstbl;
     // End of variables declaration//GEN-END:variables
 
 }

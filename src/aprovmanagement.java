@@ -133,7 +133,7 @@ public class aprovmanagement extends javax.swing.JFrame {
                 jLabel4MouseClicked(evt);
             }
         });
-        jPanel3.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 320, -1, -1));
+        jPanel3.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 380, -1, -1));
 
         penAcc.setText("Pending Accounts");
         jPanel3.add(penAcc, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));

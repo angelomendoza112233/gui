@@ -3,9 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+import config.dbConnector;
 import config.session;
 import java.awt.Color;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import javax.swing.JOptionPane;
+import net.proteanit.sql.DbUtils;
 /**
  *
  * @author SCC32
@@ -17,7 +21,9 @@ public class admindashboard extends javax.swing.JFrame {
      */
     public admindashboard() {
         initComponents();
+        displayData();
     }
+    
      Color mycolor = new Color(158,146,100);
      Color headcolor = new Color(234,207,181);
      Color bodycolor = new Color(11,180,158);
@@ -37,15 +43,20 @@ public class admindashboard extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
         REPORTS = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
         USER = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
+        appl = new javax.swing.JLabel();
+        job1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        applicationtbl = new javax.swing.JTable();
+        jLabel2 = new javax.swing.JLabel();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -88,10 +99,10 @@ public class admindashboard extends javax.swing.JFrame {
         });
         REPORTS.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel2.setFont(new java.awt.Font("Lucida Console", 1, 14)); // NOI18N
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("ACCOUNT");
-        REPORTS.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 120, 19));
+        jLabel7.setFont(new java.awt.Font("Lucida Console", 1, 14)); // NOI18N
+        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel7.setText("ACCOUNT");
+        REPORTS.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 120, 19));
 
         jPanel3.add(REPORTS, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 200, 140, 40));
 
@@ -140,6 +151,26 @@ public class admindashboard extends javax.swing.JFrame {
         });
         jPanel3.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 390, 100, 30));
 
+        appl.setFont(new java.awt.Font("Lucida Console", 1, 14)); // NOI18N
+        appl.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        appl.setText("APPLICATION");
+        appl.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                applMouseClicked(evt);
+            }
+        });
+        jPanel3.add(appl, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 310, 120, 40));
+
+        job1.setFont(new java.awt.Font("Lucida Console", 1, 14)); // NOI18N
+        job1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        job1.setText("JOBS");
+        job1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                job1MouseClicked(evt);
+            }
+        });
+        jPanel3.add(job1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 260, 120, 40));
+
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 140, 450));
 
         jPanel2.setBackground(new java.awt.Color(234, 207, 181));
@@ -153,7 +184,15 @@ public class admindashboard extends javax.swing.JFrame {
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 0, 670, 50));
 
         jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/123332-removebg-preview.png"))); // NOI18N
-        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 210, 480, -1));
+        jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 210, 400, -1));
+
+        jScrollPane2.setViewportView(applicationtbl);
+
+        jPanel1.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 110, 330, 340));
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel2.setText("Accepted Applicant");
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(230, 70, 140, 30));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 820, 450));
 
@@ -161,6 +200,21 @@ public class admindashboard extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    
+     public void displayData() {
+        try {
+            dbConnector dbc = new dbConnector(); // Ensure this class is correctly implemented
+            ResultSet rs = dbc.getData("SELECT * FROM application WHERE application_status = 'Accepted'");
+
+            if (rs != null) {
+                applicationtbl.setModel(DbUtils.resultSetToTableModel(rs)); // Use usertbl, not user1
+                rs.close();
+            }
+        } catch (SQLException ex) {
+            System.out.println("Error: " + ex.getMessage());
+        }
+    }
+     
     private void REPORTSMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_REPORTSMouseEntered
         REPORTS.setBackground(bodycolor);
     }//GEN-LAST:event_REPORTSMouseEntered
@@ -210,6 +264,18 @@ public class admindashboard extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jLabel3MouseClicked
 
+    private void applMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_applMouseClicked
+        adapp jb = new adapp();
+        jb.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_applMouseClicked
+
+    private void job1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_job1MouseClicked
+        jobs jb = new jobs();
+        jb.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_job1MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -251,17 +317,22 @@ public class admindashboard extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel REPORTS;
     private javax.swing.JPanel USER;
+    private javax.swing.JLabel appl;
+    private javax.swing.JTable applicationtbl;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
+    private javax.swing.JLabel job1;
     // End of variables declaration//GEN-END:variables
 }
