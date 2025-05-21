@@ -97,7 +97,6 @@ public class register extends javax.swing.JFrame {
 
         jPanel21 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
         lastname = new javax.swing.JTextField();
         phonenumber = new javax.swing.JTextField();
         pass = new javax.swing.JPasswordField();
@@ -133,11 +132,6 @@ public class register extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(234, 207, 181));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/angelo-removebg-preview.png"))); // NOI18N
-        jLabel2.setText("jLabel2");
-        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(-30, 240, 290, 190));
-
         jPanel21.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 230, 450));
 
         lastname.setBackground(new java.awt.Color(222, 180, 138));
@@ -645,7 +639,6 @@ private String hashPassword(String password) {
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel2;

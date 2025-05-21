@@ -6,6 +6,8 @@ import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -41,7 +43,7 @@ String path;
 public int FileExistenceChecker(String path) {
     File file = new File(path);
     String fileName = file.getName();
-    Path filePath = Paths.get("src/images", fileName);
+    Path filePath = Paths.get("src/image", fileName);
     
     boolean fileExists = Files.exists(filePath);
     return fileExists ? 1 : 0;
@@ -143,7 +145,7 @@ public int getHeightFromWidth(int originalWidth, int originalHeight, int targetW
                 backloginMouseClicked(evt);
             }
         });
-        jPanel2.add(backlogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 280, -1, -1));
+        jPanel2.add(backlogin, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 290, -1, -1));
 
         passwordtext1.setText("Role");
         jPanel2.add(passwordtext1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 190, -1, -1));
@@ -315,7 +317,7 @@ Color mycolor = new Color(202, 70, 70);
     Color bodycolor = new Color(11, 180, 158);
     Color panel = new Color(162, 158, 152);
     private void backloginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backloginMouseClicked
-        login log = new login();
+        aprovmanagement log = new aprovmanagement();
 
         log.setVisible(true);
         this.dispose();
@@ -453,6 +455,21 @@ private boolean emailExists(String email) {
     private void acctActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_acctActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_acctActionPerformed
+private String hashPassword(String password) {
+    try {
+        MessageDigest md = MessageDigest.getInstance("SHA-256");
+        byte[] hashedBytes = md.digest(password.getBytes());
+
+        StringBuilder sb = new StringBuilder();
+        for (byte b : hashedBytes) {
+            sb.append(String.format("%02x", b));
+        }
+
+        return sb.toString();
+    } catch (NoSuchAlgorithmException e) {
+        throw new RuntimeException(e);
+    }
+}
 
     private void passFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_passFocusLost
         String passInput = pass.getText();
@@ -480,16 +497,17 @@ private boolean emailExists(String email) {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
           dbConnector connector = new dbConnector();
     if (signUpValidation()) {
-        connector.insertData("INSERT INTO user (u_fname, u_lname, u_email, u_number, u_username, u_roles, u_password, u_status) " +
-    "VALUES ('" + firstname2.getText() + "','" + lastname1.getText() + "','" + email1.getText() + "','" +
-    phonenumber.getText() + "','" + user.getText() + "','" + acct.getSelectedItem() + "','" + 
-    pass.getText() + "','" + st.getSelectedItem() + "')");
+         String hashedPassword = hashPassword(pass.getText());
 
-        JOptionPane.showMessageDialog(this, "Registration successful!", "Success", JOptionPane.INFORMATION_MESSAGE);
+    connector.insertData("INSERT INTO user (u_fname, u_lname, u_email, u_number, u_username, u_roles, u_password, u_status) " +
+        "VALUES ('" + firstname2.getText() + "','" + lastname1.getText() + "','" + email1.getText() + "','" +
+        phonenumber.getText() + "','" + user.getText() + "','" + acct.getSelectedItem() + "','" + 
+        hashedPassword + "','" + st.getSelectedItem() + "')");
 
-        login lg = new login();
+    JOptionPane.showMessageDialog(this, "Registration successful!", "Success", JOptionPane.INFORMATION_MESSAGE);
 
-        this.dispose();
+    login lg = new login();
+    this.dispose();
 
     } else {
         JOptionPane.showMessageDialog(this, "Registration failed!", "fail", JOptionPane.INFORMATION_MESSAGE);

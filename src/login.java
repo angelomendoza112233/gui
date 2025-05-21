@@ -16,14 +16,6 @@ public class login extends javax.swing.JFrame {
 
     public login() {
         initComponents();
-jLabel3 = new javax.swing.JLabel();
-java.net.URL imgUrl = getClass().getResource("/image/angelo-removebg-preview.png");
-if (imgUrl != null) {
-    jLabel3.setIcon(new javax.swing.ImageIcon(imgUrl));
-} else {
-    System.err.println("Image resource not found! Please check the path and file.");
-}
-jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 260, 510, 300));
     }
    public static boolean loginAcc(String username, String password) {
     dbConnector connector = new dbConnector();
@@ -99,7 +91,6 @@ jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 260, 
         password = new javax.swing.JPasswordField();
         errorlabelpass = new javax.swing.JLabel();
         errorlabeluser = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -197,9 +188,6 @@ jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 260, 
         errorlabelpass.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jPanel2.add(errorlabelpass, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 190, 170, 10));
         jPanel2.add(errorlabeluser, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 130, 160, -1));
-
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/angelo-removebg-preview.png"))); // NOI18N
-        jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 260, 510, 300));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 320, 450));
 
@@ -327,7 +315,6 @@ jPanel2.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 260, 
     private javax.swing.JLabel errorlabeluser;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;

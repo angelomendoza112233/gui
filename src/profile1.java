@@ -53,6 +53,7 @@ public class profile1 extends javax.swing.JFrame {
         cnum = new javax.swing.JLabel();
         role = new javax.swing.JLabel();
         changepassword = new javax.swing.JButton();
+        backlogin = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -94,21 +95,31 @@ public class profile1 extends javax.swing.JFrame {
         });
         jPanel1.add(changepassword, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 260, -1, 20));
 
+        backlogin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icons8-back-50 (1).png"))); // NOI18N
+        backlogin.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                backloginMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 612, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(552, Short.MAX_VALUE)
+                .addComponent(backlogin)
+                .addContainerGap())
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 612, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 322, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(backlogin)
+                .addGap(0, 272, Short.MAX_VALUE))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 311, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 11, Short.MAX_VALUE)))
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 322, Short.MAX_VALUE))
         );
 
         pack();
@@ -143,6 +154,13 @@ profile1 prp =new profile1();
 
 
     }//GEN-LAST:event_formWindowActivated
+
+    private void backloginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backloginMouseClicked
+      admindashboard   abb = new admindashboard();
+        abb.setVisible(true);
+        this.dispose();
+
+    }//GEN-LAST:event_backloginMouseClicked
 
     /**
      * @param args the command line arguments
@@ -181,6 +199,7 @@ profile1 prp =new profile1();
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel backlogin;
     private javax.swing.JButton changepassword;
     private javax.swing.JLabel cnum;
     private javax.swing.JLabel email;

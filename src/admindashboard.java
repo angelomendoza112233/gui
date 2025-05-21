@@ -3,7 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+import config.session;
 import java.awt.Color;
+import javax.swing.JOptionPane;
 /**
  *
  * @author SCC32
@@ -40,7 +42,6 @@ public class admindashboard extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
@@ -121,25 +122,22 @@ public class admindashboard extends javax.swing.JFrame {
 
         jPanel3.add(USER, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 140, 140, 40));
 
-        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icons8-dashboard-layout-96.png"))); // NOI18N
-        jPanel3.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, -1, -1));
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icons8-dashboard-layout-96.png")));
+        jPanel3.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 120, 70));
 
         jLabel1.setFont(new java.awt.Font("Lucida Console", 1, 14)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("DASHBOARD");
         jPanel3.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 120, 19));
 
-        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icons8-back-50 (1).png"))); // NOI18N
-        jLabel7.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel7MouseClicked(evt);
-            }
-        });
-        jPanel3.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 10, 50, 50));
-
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("LOGOUT");
+        jLabel3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel3MouseClicked(evt);
+            }
+        });
         jPanel3.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 390, 100, 30));
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 140, 450));
@@ -195,12 +193,22 @@ public class admindashboard extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_REPORTSMouseClicked
 
-    private void jLabel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseClicked
-        aprovmanagement log = new aprovmanagement();
-        log.setVisible(true);
-        this.dispose();
-        login low = new login();
-    }//GEN-LAST:event_jLabel7MouseClicked
+    private void jLabel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel3MouseClicked
+        int confirm = JOptionPane.showConfirmDialog(this, "Are you sure you want to log out?", "Logout", JOptionPane.YES_NO_OPTION);
+        if (confirm == JOptionPane.YES_OPTION) {
+            session userSession = session.getInstance();
+            
+            userSession.setFirstName(null);
+            userSession.setLastName(null);
+            userSession.setEmail(null);
+            userSession.setUsername(null);
+            userSession.setAcc_type(null);
+            userSession.setAcc_status(null);
+            login lg = new login();
+            lg.setVisible(true);
+            this.dispose();
+        }
+    }//GEN-LAST:event_jLabel3MouseClicked
 
     /**
      * @param args the command line arguments
@@ -249,7 +257,6 @@ public class admindashboard extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;

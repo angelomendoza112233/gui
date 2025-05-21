@@ -259,9 +259,9 @@ private boolean signUpValidation() {
     }
 
     private void backloginMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_backloginMouseClicked
-        aprovmanagement acc = new aprovmanagement();
-    acc.setVisible(true);
-    this.dispose();
+        aprovmanagement abb = new aprovmanagement();
+    abb.setVisible(true);
+         this.dispose();
        
     }//GEN-LAST:event_backloginMouseClicked
 

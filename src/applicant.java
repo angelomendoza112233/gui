@@ -33,9 +33,9 @@ Color mycolor = new Color(158,146,100);
         jPanel3 = new javax.swing.JPanel();
         DASHBOARD = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
         REPORTS = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
 
@@ -69,9 +69,15 @@ Color mycolor = new Color(158,146,100);
 
         jPanel3.add(DASHBOARD, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 140, 40));
 
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icons8-applicant-80.png"))); // NOI18N
+        jPanel3.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, -1, -1));
+
         REPORTS.setBackground(new java.awt.Color(158, 146, 100));
         REPORTS.setToolTipText("");
         REPORTS.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                REPORTSMouseClicked(evt);
+            }
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 REPORTSMouseEntered(evt);
             }
@@ -84,12 +90,9 @@ Color mycolor = new Color(158,146,100);
         jLabel2.setFont(new java.awt.Font("Lucida Console", 1, 14)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("PROFILE");
-        REPORTS.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 120, 19));
+        REPORTS.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 120, 20));
 
         jPanel3.add(REPORTS, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 150, 140, 40));
-
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icons8-applicant-80.png"))); // NOI18N
-        jPanel3.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 10, -1, -1));
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 140, 350));
 
@@ -133,6 +136,16 @@ Color mycolor = new Color(158,146,100);
         DASHBOARD.setBackground(mycolor);
     }//GEN-LAST:event_DASHBOARDMouseExited
 
+    private void DASHBOARDMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DASHBOARDMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_DASHBOARDMouseClicked
+
+    private void REPORTSMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_REPORTSMouseClicked
+        profile1 prp = new profile1();
+        prp.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_REPORTSMouseClicked
+
     private void REPORTSMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_REPORTSMouseEntered
         REPORTS.setBackground(bodycolor);
     }//GEN-LAST:event_REPORTSMouseEntered
@@ -140,10 +153,6 @@ Color mycolor = new Color(158,146,100);
     private void REPORTSMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_REPORTSMouseExited
         REPORTS.setBackground(mycolor);
     }//GEN-LAST:event_REPORTSMouseExited
-
-    private void DASHBOARDMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_DASHBOARDMouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_DASHBOARDMouseClicked
 
     /**
      * @param args the command line arguments
