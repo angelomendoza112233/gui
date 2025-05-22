@@ -189,7 +189,7 @@ Color mycolor = new Color(158,146,100);
     }//GEN-LAST:event_DASHBOARDMouseClicked
 
     private void REPORTSMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_REPORTSMouseClicked
-        profile1 prp = new profile1();
+        profile2 prp = new profile2();
         prp.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_REPORTSMouseClicked

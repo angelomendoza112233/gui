@@ -1,5 +1,6 @@
 
 import config.dbConnector;
+import java.awt.Color;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -74,10 +75,11 @@ public class aprovmanagement extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         penAcc = new javax.swing.JLabel();
+        REPORTS = new javax.swing.JPanel();
+        jLabel7 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         usertbl = new javax.swing.JTable();
         edit = new javax.swing.JButton();
@@ -112,16 +114,6 @@ public class aprovmanagement extends javax.swing.JFrame {
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/icons8-user-96.png"))); // NOI18N
         jPanel3.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, 90, 90));
 
-        jLabel2.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("PROFILE");
-        jLabel2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel2MouseClicked(evt);
-            }
-        });
-        jPanel3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 210, 140, 20));
-
         jLabel3.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("USER");
@@ -137,6 +129,28 @@ public class aprovmanagement extends javax.swing.JFrame {
 
         penAcc.setText("Pending Accounts");
         jPanel3.add(penAcc, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
+
+        REPORTS.setBackground(new java.awt.Color(158, 146, 100));
+        REPORTS.setToolTipText("");
+        REPORTS.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                REPORTSMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                REPORTSMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                REPORTSMouseExited(evt);
+            }
+        });
+        REPORTS.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel7.setFont(new java.awt.Font("Lucida Console", 1, 14)); // NOI18N
+        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel7.setText("ACCOUNT");
+        REPORTS.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 120, 19));
+
+        jPanel3.add(REPORTS, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 200, 140, 40));
 
         jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 140, 450));
 
@@ -273,16 +287,25 @@ public class aprovmanagement extends javax.swing.JFrame {
         dbc.updateData("UPDATE user SET u_status = 'Active' WHERE u_id = '"+id+"'");
     }//GEN-LAST:event_activateActionPerformed
 
-    private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
-        
-    }//GEN-LAST:event_jLabel2MouseClicked
-
     private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked
        admindashboard log = new admindashboard();
         log.setVisible(true);
         this.dispose();
         login low = new login();
     }//GEN-LAST:event_jLabel4MouseClicked
+
+    private void REPORTSMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_REPORTSMouseClicked
+        profile1 prp = new profile1();
+        prp.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_REPORTSMouseClicked
+
+    private void REPORTSMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_REPORTSMouseEntered
+
+    }//GEN-LAST:event_REPORTSMouseEntered
+
+    private void REPORTSMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_REPORTSMouseExited
+    }//GEN-LAST:event_REPORTSMouseExited
 
     /**
      * @param args the command line arguments
@@ -322,16 +345,17 @@ public class aprovmanagement extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel PA;
+    private javax.swing.JPanel REPORTS;
     private javax.swing.JButton activate;
     private javax.swing.JButton addaccount;
     private javax.swing.JButton delete;
     private javax.swing.JButton edit;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
