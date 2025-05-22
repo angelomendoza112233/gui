@@ -238,7 +238,7 @@ public int getHeightFromWidth(int originalWidth, int originalHeight, int targetW
         jPanel2.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 290, 260, 20));
         jPanel2.add(fn, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 110, 160, 10));
         jPanel2.add(ln, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 110, 190, 10));
-        jPanel2.add(pn1, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 190, 160, 10));
+        jPanel2.add(pn1, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 170, 160, 10));
 
         pw.setFont(new java.awt.Font("Tahoma", 0, 10)); // NOI18N
         jPanel2.add(pw, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 270, 200, 10));

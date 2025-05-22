@@ -91,6 +91,7 @@ public class login extends javax.swing.JFrame {
         password = new javax.swing.JPasswordField();
         errorlabelpass = new javax.swing.JLabel();
         errorlabeluser = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -190,6 +191,9 @@ public class login extends javax.swing.JFrame {
         jPanel2.add(errorlabeluser, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 130, 160, -1));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 320, 450));
+
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/asdasd.png"))); // NOI18N
+        jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 0, 480, 420));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 810, 450));
 
@@ -318,6 +322,7 @@ public class login extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
